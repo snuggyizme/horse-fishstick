@@ -8,6 +8,7 @@ class_name GunResource
 @export var spread: float # degrees
 @export var tracerColour: String # idk how this is gonna work
 @export var knockback: float # percent
+@export var auto: bool # click spam or hold
 
 @export var isHitscan: bool
 @export var projectileSpeed: int # only if isHitscan=false. pix/sec

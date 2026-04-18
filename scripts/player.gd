@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var hp := 100.0
+
 var maxSpeed = 400
 const acceleration = 140.0
 const friction = 34
@@ -12,12 +14,21 @@ var wallJumps = maxWallJumps
 
 var skip = false
 
+var facingDirection: Vector2
+
 @export var inputPrefix: String # p1- p2-
 
 func teleportAndStop(pos: Vector2):
 	global_position = pos
 	velocity = Vector2.ZERO
 	skip = true
+	
+func hurt(damage: float):
+	hp -= damage
+	
+	if hp <= 0.0:
+		print("man im dead " + inputPrefix)
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 	if skip:
@@ -47,5 +58,12 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, friction)
 		else:
 			velocity.x = move_toward(velocity.x, 0, airFriction)
-
+	
+	if Input.is_action_pressed(inputPrefix + "left"):
+		facingDirection = Vector2.LEFT
+	elif Input.is_action_pressed(inputPrefix + "right"):
+		facingDirection = Vector2.RIGHT
+	
 	move_and_slide()
+	
+	

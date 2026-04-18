@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://dlnalxnda5w04"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_o52jr"]
+
+[resource]
+script = ExtResource("1_o52jr")
+damage = 5.0
+rateOfFire = 0.1
+rangeLimit = 15
+recoil = 5.0
+spread = 8.0
+knockback = 5.0
+isHitscan = true
+projectileSpeed = 69420
+displayName = "SMG"
+sprite = "res://assets/sprites/guns/smg.png"
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"
