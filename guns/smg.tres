@@ -6,10 +6,11 @@
 script = ExtResource("1_o52jr")
 damage = 5.0
 rateOfFire = 0.1
-rangeLimit = 15
+rangeLimit = 60
 recoil = 5.0
 spread = 8.0
 knockback = 5.0
+auto = true
 isHitscan = true
 projectileSpeed = 69420
 displayName = "SMG"
