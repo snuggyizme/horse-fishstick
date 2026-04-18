@@ -14,4 +14,4 @@ class_name GunResource
 @export var projectileSpeed: int # only if isHitscan=false. pix/sec
 
 @export var displayName: String
-@export var sprite: String
+@export var visual: PackedScene
