@@ -5,8 +5,9 @@ const halfScreen = Vector2(432.0 / 2.0, 243.0 / 2.0)
 const maps = [
 	{"name": "hallway_01", "group": "hallway"},
 	{"name": "hallway_02", "group": "hallway"},
+	{"name": "hallway_03", "group": "hallway"},
 	{"name": "palace_01", "group": "palace"},
-	{"name": "chamber_01", "group": "chamber"}
+	{"name": "chamber_01", "group": "chamber"},
 ]
 
 var lastMaps = []
