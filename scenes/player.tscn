@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://687fis7fpu17"]
+
+[ext_resource type="Script" uid="uid://bqs5rm41kplub" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://vcvb635hpykg" path="res://assets/sprites/testguy.png" id="2_g2els"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 5.0
+height = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(4, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
+size = Vector2(7, 7.9999995)
+
+[node name="player" type="CharacterBody2D" unique_id=1558827472]
+z_index = 3
+script = ExtResource("1_3vyb7")
+
+[node name="collision" type="CollisionShape2D" parent="." unique_id=1741247994]
+shape = SubResource("CapsuleShape2D_g2els")
+
+[node name="godot borb" type="Sprite2D" parent="." unique_id=1337628103]
+texture = ExtResource("2_g2els")
+
+[node name="headhurtbox" type="Area2D" parent="." unique_id=423053245 groups=["hitbox"]]
+
+[node name="head" type="CollisionShape2D" parent="headhurtbox" unique_id=1921805453]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_g2els")
+debug_color = Color(0.99084824, 0.025033526, 0.24676916, 0.41960785)
+
+[node name="bodyhurtbox" type="Area2D" parent="." unique_id=217654590 groups=["hitbox"]]
+
+[node name="body" type="CollisionShape2D" parent="bodyhurtbox" unique_id=1376468382]
+position = Vector2(-2.1855694e-08, 1.5)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_qhqgy")
+debug_color = Color(0.6537394, 0.5177267, 0.05323176, 0.41960785)
+
+[node name="gunController" type="Node2D" parent="." unique_id=1865751482]

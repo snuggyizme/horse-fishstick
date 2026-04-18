@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cs7fi2cmlvdh4"]
+
+[ext_resource type="PackedScene" uid="uid://687fis7fpu17" path="res://scenes/player.tscn" id="1_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://vcvb635hpykg" path="res://assets/sprites/testguy.png" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://csbie4ikeq7yt" path="res://scripts/testbittpn.gd" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cjw7c2x0drr77" path="res://scenes/ui.tscn" id="4_jyhfs"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e5uuo"]
+distance = -161.0
+
+[node name="main" type="Node2D" unique_id=1915239700]
+
+[node name="player" parent="." unique_id=1558827472 instance=ExtResource("1_0wfyh")]
+z_index = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2000776710]
+
+[node name="floor" type="CollisionShape2D" parent="StaticBody2D" unique_id=1440513977]
+shape = SubResource("WorldBoundaryShape2D_e5uuo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=450233664]
+z_index = 50
+position = Vector2(10, -18)
+texture = ExtResource("2_jyhfs")
+
+[node name="Button" type="Button" parent="." unique_id=923695349]
+z_index = 5
+offset_left = 52.0
+offset_top = -187.0
+offset_right = 495.0
+offset_bottom = 59.0
+text = "new map"
+script = ExtResource("3_sugp2")
+
+[node name="camre" type="Camera2D" parent="." unique_id=2059359122]
+
+[node name="gameworld" type="Node2D" parent="." unique_id=1380691178]
+position = Vector2(-216, -121.5)
+
+[node name="ui" parent="." unique_id=1658613418 instance=ExtResource("4_jyhfs")]
+
+[connection signal="pressed" from="Button" to="Button" method="press"]

@@ -1,0 +1,51 @@
+extends CharacterBody2D
+
+var maxSpeed = 400
+const acceleration = 140.0
+const friction = 34
+var jumpSpeed = -210.0
+const wallJumpSpeed = -310.0 # fuc kyou
+const airFriction = 10
+
+var maxWallJumps = 1
+var wallJumps = maxWallJumps
+
+var skip = false
+
+@export var inputPrefix: String # p1- p2-
+
+func teleportAndStop(pos: Vector2):
+	global_position = pos
+	velocity = Vector2.ZERO
+	skip = true
+
+func _physics_process(delta: float) -> void:
+	if skip:
+		skip = false
+		return
+	
+	if not is_on_floor():
+		velocity += get_gravity() * delta * 1.1 # I hate gravity fuck you
+	elif Input.is_action_pressed(inputPrefix + "up"):
+		velocity.y = jumpSpeed
+	else:
+		wallJumps = maxWallJumps
+		
+	if is_on_wall_only() and wallJumps > 0 and Input.is_action_just_pressed(inputPrefix + "up"):
+		velocity.y = wallJumpSpeed
+		wallJumps -= 1
+		
+	var direction := Input.get_axis(inputPrefix + "left", inputPrefix + "right")
+	
+	if direction:
+		var speedRatio = abs(velocity.x) / maxSpeed
+		var r = 1 - speedRatio
+		
+		velocity.x = direction * acceleration * r
+	else:
+		if is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, friction)
+		else:
+			velocity.x = move_toward(velocity.x, 0, airFriction)
+
+	move_and_slide()

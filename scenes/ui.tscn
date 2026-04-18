@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cjw7c2x0drr77"]
+
+[ext_resource type="Texture2D" uid="uid://clk2korhoh8wj" path="res://assets/sprites/uibottombar.png" id="1_nt7q6"]
+
+[node name="ui" type="Node2D" unique_id=1658613418]
+
+[node name="uibottombar" type="Sprite2D" parent="." unique_id=239330426]
+z_index = 10
+texture = ExtResource("1_nt7q6")
