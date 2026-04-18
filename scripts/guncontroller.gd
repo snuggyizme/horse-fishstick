@@ -1,7 +1,7 @@
 extends Node2D
 
 var fireTime := 0.0
-var gun: GunResource = load("res://guns/smg.tres")
+var gun: GunResource = load("res://guns/pistol.tres")
 
 func shoot():
 	var spreadRad = deg_to_rad(randf_range(-gun.spread, gun.spread))
@@ -16,9 +16,11 @@ func shoot():
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
 	
+	print("dir:", direction.rotated(spreadRad))
+	#print(result)
+	#print(query)
+	
 	var result = spaceState.intersect_ray(query)
-	
-	
 	
 	if result:
 		var tracer = Line2D.new()
@@ -33,6 +35,9 @@ func shoot():
 	
 		var tracerTween = get_tree().create_tween()
 		tracerTween.tween_property(tracer, "default_color", Color8(255, 255, 255, 0), 0.2)
+		
+		if tracer.default_color.a <= 0.5:
+			tracer.queue_free()
 		
 		var hit = result["collider"]
 		
