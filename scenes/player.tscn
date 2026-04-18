@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqs5rm41kplub" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://vcvb635hpykg" path="res://assets/sprites/testguy.png" id="2_g2els"]
+[ext_resource type="Script" uid="uid://crwiknpaaxsly" path="res://scripts/guncontroller.gd" id="3_qhqgy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 5.0
@@ -39,3 +40,4 @@ shape = SubResource("RectangleShape2D_qhqgy")
 debug_color = Color(0.6537394, 0.5177267, 0.05323176, 0.41960785)
 
 [node name="gunController" type="Node2D" parent="." unique_id=1865751482]
+script = ExtResource("3_qhqgy")
