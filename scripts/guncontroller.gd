@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/t-M0N.tres")
+var gun: GunResource = load("res://guns/smg.tres")
 
 var visual
 var muzzle
@@ -51,6 +51,8 @@ func shoot():
 	
 	var start = muzzle.global_position
 	var direction = get_parent().facingDirection
+	if get_parent().yAim != 0:
+		direction = Vector2(0.0, float(get_parent().yAim))
 	var end = start + direction.rotated(spreadRad) * gun.rangeLimit
 	
 	var spaceState = get_world_2d().direct_space_state
@@ -92,7 +94,27 @@ func tryShoot():
 			ammo -= loadAmount
 			
 		if burstAmmo <= 0:
+			print("no ammo")
 			return # empty mag die die die uh die
+		
+		shoot()
+		burstAmmo -= 1
+		
+		burstFireTime = now + gun.burstRate
+		fireTime = now + gun.rateOfFire
+		
+		return
+	if now < fireTime:
+		return
+		
+	if ammo <= 0:
+		print("no ammo")
+		return
+	
+	ammo -= 1
+	shoot()
+	fireTime = now + gun.rateOfFire
+		
 	
 func flash(pos, dir):
 	var mFlash = Sprite2D.new()
@@ -112,6 +134,16 @@ func flash(pos, dir):
 	
 
 func _process(_delta: float) -> void:
+	var yAim = get_parent().yAim
+	if yAim > 0:
+		visual.rotation = 90
+	elif yAim < 0:
+		visual.rotation = -90
+	else:
+		visual.rotation = 0
+	
+	if facingDirection == "left":
+		visual.rotation = -visual.rotation
 		
 	if (Input.is_action_just_pressed(get_parent().inputPrefix + "shoot") and gun.auto == false) or (Input.is_action_pressed(get_parent().inputPrefix + "shoot") and gun.auto == true):
 		tryShoot()

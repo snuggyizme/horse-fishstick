@@ -15,6 +15,7 @@ var wallJumps = maxWallJumps
 var skip = false
 
 var facingDirection: Vector2
+var yAim: int # 1 up 0 none -1 down
 
 @export var inputPrefix: String # p1- p2-
 
@@ -63,6 +64,13 @@ func _physics_process(delta: float) -> void:
 		facingDirection = Vector2.LEFT
 	elif Input.is_action_pressed(inputPrefix + "right"):
 		facingDirection = Vector2.RIGHT
+		
+	if Input.is_action_pressed(inputPrefix + "up"):
+		yAim = -1
+	elif Input.is_action_pressed(inputPrefix + "down"):
+		yAim = 1
+	else:
+		yAim = 0
 	
 	move_and_slide()
 	
