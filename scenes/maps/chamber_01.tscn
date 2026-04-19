@@ -1,6 +1,9 @@
 [gd_scene format=4 uid="uid://bfepyq5kjtcw7"]
 
 [ext_resource type="TileSet" uid="uid://cdxwohf1nk3s8" path="res://assets/tileset.tres" id="1_qibph"]
+[ext_resource type="PackedScene" uid="uid://dij03yxhvec7u" path="res://scenes/spawner.tscn" id="2_bdj28"]
+[ext_resource type="Resource" uid="uid://dc7qt5ungvyfe" path="res://guns/t-M0N.tres" id="3_agnfu"]
+[ext_resource type="Resource" uid="uid://bvtygt0imthr5" path="res://guns/desert-eagle.tres" id="4_liuyj"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lg23i"]
 distance = -447.0
@@ -28,3 +31,17 @@ position = Vector2(371, 181)
 
 [node name="b" type="Marker2D" parent="playerspawns" unique_id=1918117365]
 position = Vector2(350, 181)
+
+[node name="spawners" type="Node2D" parent="." unique_id=1463335189]
+
+[node name="1" parent="spawners" unique_id=841179750 instance=ExtResource("2_bdj28")]
+position = Vector2(72, 72)
+gun = ExtResource("3_agnfu")
+
+[node name="2" parent="spawners" unique_id=491230946 instance=ExtResource("2_bdj28")]
+position = Vector2(160, 136)
+gun = ExtResource("4_liuyj")
+
+[node name="3" parent="spawners" unique_id=664729717 instance=ExtResource("2_bdj28")]
+position = Vector2(120, 184)
+gun = ExtResource("4_liuyj")
