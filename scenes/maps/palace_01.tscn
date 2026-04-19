@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://ccjwq4aks63lx"]
 
 [ext_resource type="TileSet" uid="uid://cdxwohf1nk3s8" path="res://assets/tileset.tres" id="1_leau1"]
+[ext_resource type="PackedScene" uid="uid://dij03yxhvec7u" path="res://scenes/spawner.tscn" id="2_vhqcn"]
+[ext_resource type="Resource" uid="uid://dlnalxnda5w04" path="res://guns/smg.tres" id="3_nvlvc"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_btf44"]
 distance = -447.0
@@ -28,3 +30,13 @@ position = Vector2(56, 213)
 
 [node name="b" type="Marker2D" parent="playerspawns" unique_id=1564866481]
 position = Vector2(372, 212)
+
+[node name="spawners" type="Node2D" parent="." unique_id=1798730496]
+
+[node name="spawner" parent="spawners" unique_id=841179750 instance=ExtResource("2_vhqcn")]
+position = Vector2(142, 200)
+gun = ExtResource("3_nvlvc")
+
+[node name="spawner2" parent="spawners" unique_id=2073002016 instance=ExtResource("2_vhqcn")]
+position = Vector2(291, 200)
+gun = ExtResource("3_nvlvc")
