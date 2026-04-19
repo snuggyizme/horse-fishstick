@@ -3,9 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://d26ia1rg60tar" path="res://assets/sprites/guns/smg.png" id="1_4rgd1"]
 
 [node name="visual-smg" type="Node2D" unique_id=1208460005]
+position = Vector2(2.535, 0)
 
 [node name="gun" type="Sprite2D" parent="." unique_id=261344669]
 texture = ExtResource("1_4rgd1")
 
-[node name="marker" type="Marker2D" parent="." unique_id=574742725]
+[node name="muzzle" type="Marker2D" parent="." unique_id=574742725]
 position = Vector2(4, -0.5)

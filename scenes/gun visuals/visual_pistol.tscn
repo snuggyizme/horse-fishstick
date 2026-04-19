@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bwceayax0gp6g" path="res://assets/sprites/guns/pistol.png" id="1_pluak"]
 
 [node name="visual-pistol" type="Node2D" unique_id=2059014370]
+position = Vector2(2.075, 0)
 
 [node name="gun" type="Sprite2D" parent="." unique_id=1620429450]
 texture = ExtResource("1_pluak")

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bxefqt0biphv2"]
+
+[ext_resource type="Texture2D" uid="uid://rsh37gwg2nka" path="res://assets/sprites/guns/deserteagle.png" id="1_pd1kw"]
+
+[node name="visual-desert-eagle" type="Node2D" unique_id=1328825795]
+position = Vector2(2.19, 0.885)
+
+[node name="gun" type="Sprite2D" parent="." unique_id=296242673]
+texture = ExtResource("1_pd1kw")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=1360148281]
+position = Vector2(4, -1.5)

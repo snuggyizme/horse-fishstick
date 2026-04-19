@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://dc7qt5ungvyfe"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_sb2up"]
+[ext_resource type="PackedScene" uid="uid://bcjnmovfyyg4j" path="res://scenes/gun visuals/visual_t_m_0n.tscn" id="2_rg8el"]
+
+[resource]
+script = ExtResource("1_sb2up")
+damage = 5.0
+rateOfFire = 0.65
+rangeLimit = 260
+recoil = 1.0
+spread = 2.0
+knockback = 1.0
+auto = true
+isHitscan = true
+projectileSpeed = 69420
+displayName = "t-M0N"
+visual = ExtResource("2_rg8el")
+isBurst = true
+burstSize = 3
+burstRate = 0.05
+ammo = 27
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

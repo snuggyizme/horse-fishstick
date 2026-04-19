@@ -16,4 +16,5 @@ isHitscan = true
 projectileSpeed = 69420
 displayName = "SMG"
 visual = ExtResource("2_kbym2")
+ammo = 36
 metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

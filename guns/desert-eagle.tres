@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://bvtygt0imthr5"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_sw8sc"]
+[ext_resource type="PackedScene" uid="uid://bxefqt0biphv2" path="res://scenes/gun visuals/visual_desert_eagle.tscn" id="2_am4rg"]
+
+[resource]
+script = ExtResource("1_sw8sc")
+damage = 50.0
+rateOfFire = 0.75
+rangeLimit = 99999
+recoil = 15.0
+spread = 1.5
+knockback = 2.5
+auto = true
+isHitscan = true
+projectileSpeed = 69420
+displayName = "desert eagle"
+visual = ExtResource("2_am4rg")
+ammo = 3
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

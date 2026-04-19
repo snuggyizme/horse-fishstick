@@ -15,3 +15,9 @@ class_name GunResource
 
 @export var displayName: String
 @export var visual: PackedScene
+
+@export var isBurst: bool # clump bullets in bursts
+@export var burstSize: int # only if isBursts = true
+@export var burstRate: float # seconds betweeen bursts
+
+@export var ammo: int 

@@ -15,4 +15,5 @@ isHitscan = true
 projectileSpeed = 69420
 displayName = "pistol"
 visual = ExtResource("2_w10px")
+ammo = 12
 metadata/_custom_type_script = "uid://b0c2pvngg4dqi"
