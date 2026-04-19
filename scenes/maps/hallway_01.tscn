@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://bulrbwc5nxkg"]
 
 [ext_resource type="Texture2D" uid="uid://dxqsicxhu71se" path="res://assets/sprites/tiles.png" id="1_q27pd"]
+[ext_resource type="PackedScene" uid="uid://dij03yxhvec7u" path="res://scenes/spawner.tscn" id="2_jfqb8"]
+[ext_resource type="Resource" uid="uid://dlnalxnda5w04" path="res://guns/smg.tres" id="3_v8edf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q27pd"]
 texture = ExtResource("1_q27pd")
@@ -52,3 +54,13 @@ position = Vector2(27, 166)
 
 [node name="b" type="Marker2D" parent="playerspawns" unique_id=2136484366]
 position = Vector2(226, 103)
+
+[node name="spawners" type="Node2D" parent="." unique_id=1235019805]
+
+[node name="1" parent="spawners" unique_id=841179750 instance=ExtResource("2_jfqb8")]
+position = Vector2(152, 152)
+gun = ExtResource("3_v8edf")
+
+[node name="2" parent="spawners" unique_id=1915467747 instance=ExtResource("2_jfqb8")]
+position = Vector2(304, 120)
+gun = ExtResource("3_v8edf")

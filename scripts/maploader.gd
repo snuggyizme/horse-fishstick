@@ -8,6 +8,7 @@ const maps = [
 	{"name": "hallway_03", "group": "hallway"},
 	{"name": "palace_01", "group": "palace"},
 	{"name": "chamber_01", "group": "chamber"},
+	{"name": "temple_01", "group": "temple"},
 ]
 
 var lastMaps = []

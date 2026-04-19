@@ -19,6 +19,9 @@ var yAim: int # 1 up 0 none -1 down
 
 @export var inputPrefix: String # p1- p2-
 
+func justSwapped():
+	return Input.is_action_just_pressed(inputPrefix + "swap")
+
 func teleportAndStop(pos: Vector2):
 	global_position = pos
 	velocity = Vector2.ZERO

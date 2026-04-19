@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dij03yxhvec7u"]
+
+[ext_resource type="Texture2D" uid="uid://bauq0lxsl05kv" path="res://assets/sprites/spawner.png" id="1_2vbf6"]
+[ext_resource type="Script" uid="uid://0slklfi1evwd" path="res://scenes/spawner.gd" id="1_ik2nu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik2nu"]
+atlas = ExtResource("1_2vbf6")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx2ig"]
+atlas = ExtResource("1_2vbf6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6bbd6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik2nu")
+}],
+"loop": true,
+"name": &"ready",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx2ig")
+}],
+"loop": true,
+"name": &"standby",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tx2ig"]
+radius = 21.023796
+
+[node name="spawner" type="Node2D" unique_id=841179750]
+script = ExtResource("1_ik2nu")
+
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=519587579]
+sprite_frames = SubResource("SpriteFrames_6bbd6")
+animation = &"ready"
+
+[node name="range" type="Area2D" parent="." unique_id=1040013916]
+
+[node name="EEGGBJBHAHAHAHGAGA" type="CollisionShape2D" parent="range" unique_id=1954295270]
+shape = SubResource("CircleShape2D_tx2ig")
+
+[node name="gun" type="Sprite2D" parent="." unique_id=127340524]
+
+[connection signal="body_entered" from="range" to="." method="bodyEntered"]
+[connection signal="body_exited" from="range" to="." method="bodyExited"]

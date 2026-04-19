@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/smg.tres")
+var gun: GunResource = load("res://guns/t-M0N.tres")
 
 var visual
 var muzzle
@@ -26,7 +26,7 @@ func setGun(newGun: GunResource):
 	add_child(visual)
 	
 	muzzle = visual.get_node("muzzle")
-	gunPos = visual.global_position
+	gunPos = visual.position
 	
 	burstAmmo = gun.burstSize
 	ammo = gun.ammo
