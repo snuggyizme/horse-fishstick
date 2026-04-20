@@ -1,5 +1,12 @@
 extends Node
 
+signal playerReady(p1, p2)
+
+var p1
+var p2
+
+var ui
+
 const halfScreen = Vector2(432.0 / 2.0, 243.0 / 2.0)
 
 const maps = [
@@ -15,6 +22,7 @@ var lastMaps = []
 
 func loadMap(mapname: String):	
 	var gameworld = get_tree().current_scene.get_node("gameworld")
+	
 	for innocentChild in gameworld.get_children():
 		innocentChild.queue_free()
 		
@@ -26,8 +34,6 @@ func loadMap(mapname: String):
 	
 	var playerScene = load("res://scenes/player.tscn")
 	var playerFolder = get_tree().current_scene.get_node("players")
-	var p1
-	var p2
 	
 	if playerFolder.has_node("player1"):
 		p1 = playerFolder.get_node("player1")
@@ -53,7 +59,10 @@ func loadMap(mapname: String):
 	else:
 		p1.teleportAndStop(spawnB.global_position - halfScreen)
 		p2.teleportAndStop(spawnA.global_position - halfScreen)
-
+		
+func _ready():
+	pickMap()
+	
 func pickMap():
 	var skip: bool
 	if len(_getAllMapNames(maps)) < len(lastMaps):
@@ -67,9 +76,15 @@ func pickMap():
 	var pick = maps.pick_random()["name"]
 	while pick in lastMaps and not skip:
 		pick = maps.pick_random()["name"]
+	
+	while ui == null:
+		await get_tree().process_frame
 		
+	await get_tree().process_frame # just in fucking case i hate fucking fuckign hate fuck
 	loadMap(pick)
 	lastMaps.append(pick)
+	playerReady.emit(p1, p2)
+	
 	
 func _getAllMapNames(m: Array):
 	var export = []

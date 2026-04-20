@@ -1,9 +1,49 @@
 [gd_scene format=3 uid="uid://cjw7c2x0drr77"]
 
 [ext_resource type="Texture2D" uid="uid://clk2korhoh8wj" path="res://assets/sprites/uibottombar.png" id="1_nt7q6"]
+[ext_resource type="Script" uid="uid://ygr1nrog623c" path="res://scripts/ui.gd" id="1_x4jx1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nt7q6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt7q6"]
+bg_color = Color(0.7227905, 0.7759892, 0.6200905, 1)
+corner_radius_top_left = 4
+corner_radius_bottom_right = 5
+corner_detail = 1
+shadow_offset = Vector2(0, 2.115)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x4jx1"]
 
 [node name="ui" type="Node2D" unique_id=1658613418]
+script = ExtResource("1_x4jx1")
 
 [node name="uibottombar" type="Sprite2D" parent="." unique_id=239330426]
 z_index = 10
 texture = ExtResource("1_nt7q6")
+
+[node name="p1_hp" type="ProgressBar" parent="." unique_id=1319845625]
+z_index = 11
+offset_left = -150.0
+offset_top = 112.0
+offset_right = -59.0
+offset_bottom = 118.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_nt7q6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nt7q6")
+step = 0.5
+value = 100.0
+allow_lesser = true
+show_percentage = false
+
+[node name="p2_hp" type="ProgressBar" parent="." unique_id=201592219]
+z_index = 11
+offset_left = 59.0
+offset_top = 112.0
+offset_right = 150.0
+offset_bottom = 118.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_x4jx1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nt7q6")
+step = 0.5
+value = 100.0
+allow_lesser = true
+show_percentage = false

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal damaged(damage, hp)
+
 var hp := 100.0
 
 var maxSpeed = 400
@@ -17,6 +19,8 @@ var skip = false
 var facingDirection: Vector2
 var yAim: int # 1 up 0 none -1 down
 
+
+
 @export var inputPrefix: String # p1- p2-
 
 func justSwapped():
@@ -33,6 +37,8 @@ func hurt(damage: float):
 	if hp <= 0.0:
 		print("man im dead " + inputPrefix)
 		queue_free()
+	
+	emit_signal("damaged", damage, hp)
 
 func _physics_process(delta: float) -> void:
 	if skip:

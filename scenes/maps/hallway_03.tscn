@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dkobvxx821tau"]
 
 [ext_resource type="TileSet" uid="uid://cdxwohf1nk3s8" path="res://assets/tileset.tres" id="1_xvhoy"]
+[ext_resource type="PackedScene" uid="uid://dij03yxhvec7u" path="res://scenes/spawner.tscn" id="2_oeric"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c7820"]
 distance = -582.0
@@ -28,3 +29,11 @@ position = Vector2(185, 89)
 
 [node name="b" type="Marker2D" parent="playerspawns" unique_id=1515115094]
 position = Vector2(229, 134)
+
+[node name="spawners" type="Node2D" parent="." unique_id=1663558542]
+
+[node name="spawner" parent="spawners" unique_id=841179750 instance=ExtResource("2_oeric")]
+position = Vector2(24, 56)
+
+[node name="spawner2" parent="spawners" unique_id=216502543 instance=ExtResource("2_oeric")]
+position = Vector2(408, 88)

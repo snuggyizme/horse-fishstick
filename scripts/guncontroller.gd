@@ -55,12 +55,14 @@ func shoot():
 		direction = Vector2(0.0, float(get_parent().yAim))
 	var end = start + direction.rotated(spreadRad) * gun.rangeLimit
 	
+	get_parent().velocity += -direction * 2 #aa
 	var spaceState = get_world_2d().direct_space_state
 	
 	var query = PhysicsRayQueryParameters2D.create(start, end)
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
 	query.exclude = [get_parent()]
+	query.collision_mask = 1
 	
 	var result = spaceState.intersect_ray(query)
 	

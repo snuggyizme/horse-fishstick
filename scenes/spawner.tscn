@@ -33,6 +33,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_tx2ig"]
 radius = 21.023796
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ik2nu"]
+points = PackedVector2Array(0, 0, 3, 3, 3, 4, -13, 4, -13, 3, -10, 0)
+
 [node name="spawner" type="Node2D" unique_id=841179750]
 script = ExtResource("1_ik2nu")
 
@@ -41,11 +44,19 @@ sprite_frames = SubResource("SpriteFrames_6bbd6")
 animation = &"ready"
 
 [node name="range" type="Area2D" parent="." unique_id=1040013916]
+collision_layer = 4
 
 [node name="EEGGBJBHAHAHAHGAGA" type="CollisionShape2D" parent="range" unique_id=1954295270]
 shape = SubResource("CircleShape2D_tx2ig")
 
 [node name="gun" type="Sprite2D" parent="." unique_id=127340524]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1070575241]
+position = Vector2(5, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=111449399]
+shape = SubResource("ConvexPolygonShape2D_ik2nu")
+debug_color = Color(0.3764706, 0.23921569, 0.81960785, 0.8)
 
 [connection signal="body_entered" from="range" to="." method="bodyEntered"]
 [connection signal="body_exited" from="range" to="." method="bodyExited"]
