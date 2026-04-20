@@ -4,7 +4,7 @@ var fireTime := 0.0
 var burstFireTime := 0.0
 var gun: GunResource = load("res://guns/t-M0N.tres")
 
-var visual
+var visual: Node2D
 var muzzle
 
 var facingDirection = "right"
@@ -12,6 +12,8 @@ var gunPos
 
 var burstAmmo: int
 var ammo: int
+
+var holyFuckTooManyAimingVariables
 
 func _ready():
 	setGun(gun)
@@ -52,10 +54,10 @@ func shoot():
 	var start = muzzle.global_position
 	var direction = get_parent().facingDirection
 	if get_parent().yAim != 0:
-		direction = Vector2(0.0, float(get_parent().yAim))
+		direction = holyFuckTooManyAimingVariables
 	var end = start + direction.rotated(spreadRad) * gun.rangeLimit
 	
-	get_parent().velocity += -direction * 2 #aa
+	get_parent().nudge(holyFuckTooManyAimingVariables, 30)
 	var spaceState = get_world_2d().direct_space_state
 	
 	var query = PhysicsRayQueryParameters2D.create(start, end)
@@ -137,12 +139,19 @@ func flash(pos, dir):
 
 func _process(_delta: float) -> void:
 	var yAim = get_parent().yAim
-	if yAim > 0:
-		visual.rotation = 90
-	elif yAim < 0:
-		visual.rotation = -90
+	if not get_parent().aimingX:
+		if yAim > 0:
+			visual.rotation_degrees = 90
+			holyFuckTooManyAimingVariables = Vector2.DOWN
+		elif yAim < 0:
+			visual.rotation_degrees = -90
+			holyFuckTooManyAimingVariables = Vector2.UP
+		else:
+			visual.rotation_degrees = 0
+			holyFuckTooManyAimingVariables = get_parent().facingDirection
 	else:
-		visual.rotation = 0
+		visual.rotation_degrees = 0
+		holyFuckTooManyAimingVariables = get_parent().facingDirection
 	
 	if facingDirection == "left":
 		visual.rotation = -visual.rotation

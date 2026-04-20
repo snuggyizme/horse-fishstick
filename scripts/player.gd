@@ -18,8 +18,13 @@ var skip = false
 
 var facingDirection: Vector2
 var yAim: int # 1 up 0 none -1 down
+var aimingX: bool
 
-
+const defaults = {
+	"maxSpeed": 400,
+	"jumpSpeed": -210.0,
+	"maxWallJumps": 1,
+}
 
 @export var inputPrefix: String # p1- p2-
 
@@ -30,6 +35,9 @@ func teleportAndStop(pos: Vector2):
 	global_position = pos
 	velocity = Vector2.ZERO
 	skip = true
+
+func nudge(direction, speed):
+	velocity += direction * speed
 	
 func hurt(damage: float):
 	hp -= damage
@@ -71,8 +79,12 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed(inputPrefix + "left"):
 		facingDirection = Vector2.LEFT
+		aimingX = true
 	elif Input.is_action_pressed(inputPrefix + "right"):
 		facingDirection = Vector2.RIGHT
+		aimingX = true
+	else:
+		aimingX = false
 		
 	if Input.is_action_pressed(inputPrefix + "up"):
 		yAim = -1

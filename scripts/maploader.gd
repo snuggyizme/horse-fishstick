@@ -59,6 +59,9 @@ func loadMap(mapname: String):
 	else:
 		p1.teleportAndStop(spawnB.global_position - halfScreen)
 		p2.teleportAndStop(spawnA.global_position - halfScreen)
+	
+	p1.hp = 100
+	p2.hp = 100
 		
 func _ready():
 	pickMap()
@@ -84,8 +87,7 @@ func pickMap():
 	loadMap(pick)
 	lastMaps.append(pick)
 	playerReady.emit(p1, p2)
-	
-	
+		
 func _getAllMapNames(m: Array):
 	var export = []
 	for i in m:
