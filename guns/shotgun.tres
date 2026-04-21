@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://c1835y5u6885p"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_xt1l3"]
+[ext_resource type="PackedScene" uid="uid://b27dgy8l08ej3" path="res://scenes/gun visuals/visual_shotgun.tscn" id="2_amjxj"]
+
+[resource]
+script = ExtResource("1_xt1l3")
+damage = 6.5
+rateOfFire = 2.2
+rangeLimit = 70
+recoil = 1.6
+spread = 13.0
+knockback = 0.2
+isHitscan = true
+projectileSpeed = 69420
+displayName = "shotgun"
+visual = ExtResource("2_amjxj")
+isBurst = true
+burstSize = 16
+burstRate = 69420.0
+ammo = 64
+bulletsPerShot = 16
+doBullertsPerShotWithBurstAmmo = true
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

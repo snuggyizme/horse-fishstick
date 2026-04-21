@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b27dgy8l08ej3"]
+
+[ext_resource type="Texture2D" uid="uid://cjvjymslnswsd" path="res://assets/sprites/guns/shotgun.png" id="1_sg11f"]
+
+[node name="visual-shotgun" type="Node2D" unique_id=14661002]
+position = Vector2(2.07, 0.255)
+
+[node name="gun" type="Sprite2D" parent="." unique_id=1980935187]
+texture = ExtResource("1_sg11f")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=1635726664]
+position = Vector2(5, 0.5)

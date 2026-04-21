@@ -21,3 +21,6 @@ class_name GunResource
 @export var burstRate: float # seconds betweeen bursts
 
 @export var ammo: int 
+
+@export var bulletsPerShot: int # shotgun
+@export var doBullertsPerShotWithBurstAmmo: bool # if so, the shotgun will consume the ammo of the burst to fire it. if false, the shotgun will fire bulletsPerShot and take 1 ammo.

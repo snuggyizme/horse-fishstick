@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/t-M0N.tres")
+var gun: GunResource = load("res://guns/shotgun.tres")
 
 var visual: Node2D
 var muzzle
@@ -59,7 +59,26 @@ func shoot():
 	
 	get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 100)
 	#get_parent().nudge(Vector2.LEFT, 350)
+	
 	var spaceState = get_world_2d().direct_space_state
+	var muzzleQuery = PhysicsPointQueryParameters2D.new()
+	muzzleQuery.position = start
+	muzzleQuery.collide_with_areas = true
+	muzzleQuery.collide_with_bodies = true
+	muzzleQuery.exclude = [get_parent()]
+	muzzleQuery.collision_mask = 1
+	
+	var muzzleResults = spaceState.intersect_point(muzzleQuery)
+	if muzzleResults.size() > 0:
+		for hit in muzzleResults:
+			var collider = hit.collider
+			
+			if collider.has_method("hurt"):
+				collider.hurt(gun.damage)
+				collider.nudge(-direction, gun.knockback * 50)
+				
+		#print("point blank")
+		return
 	
 	var query = PhysicsRayQueryParameters2D.create(start, end)
 	query.collide_with_areas = true
@@ -80,13 +99,14 @@ func shoot():
 		
 		if hit.has_method("hurt"):
 			hit.hurt(gun.damage)
+			hit.nudge(-direction, gun.knockback * 50)
 	else:
 		trace(start, end)
 
 func tryShoot():
 	var now = Time.get_ticks_msec() / 1000.0
 	
-	if gun.isBurst:
+	if gun.isBurst and not gun.doBullertsPerShotWithBurstAmmo: # burst and not shotgun
 		if burstAmmo > 0 and now < burstFireTime:
 			return
 		
@@ -109,6 +129,25 @@ func tryShoot():
 		fireTime = now + gun.rateOfFire
 		
 		return
+	elif gun.isBurst and gun.doBullertsPerShotWithBurstAmmo: # burst shotgun (reload needed)
+		if burstAmmo > 0 and now < fireTime:
+			return
+		if burstAmmo <= 0:
+			if now < fireTime:
+				return
+			
+			var loadAmount = min(gun.burstSize, ammo)
+			burstAmmo = loadAmount
+			ammo -= loadAmount
+		
+		if ammo <= 0:
+			print("no ammo")
+			return
+		
+		for pellet in range(gun.bulletsPerShot):
+			shoot()
+			burstAmmo -= 1
+		fireTime = now + gun.rateOfFire
 	if now < fireTime:
 		return
 		
