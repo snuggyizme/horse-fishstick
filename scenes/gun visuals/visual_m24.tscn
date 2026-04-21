@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c6388mkk73pcm"]
+
+[ext_resource type="Texture2D" uid="uid://cldttxtk7snsw" path="res://assets/sprites/guns/m24.png" id="1_trms4"]
+
+[node name="visual-m24" type="Node2D" unique_id=1754497096]
+position = Vector2(-2.9, 0)
+
+[node name="gun" type="Sprite2D" parent="." unique_id=1206192975]
+texture = ExtResource("1_trms4")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=1680083788]
+position = Vector2(14, -0.5)
+
+[node name="decals" type="Node2D" parent="." unique_id=636428542]

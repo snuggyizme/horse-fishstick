@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://cpwubq1ostfeg"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_otq1n"]
+[ext_resource type="PackedScene" uid="uid://c6388mkk73pcm" path="res://scenes/gun visuals/visual_m24.tscn" id="2_cw0l5"]
+
+[resource]
+script = ExtResource("1_otq1n")
+damage = 99.0
+rateOfFire = 3.0
+rangeLimit = 50000
+recoil = 2.0
+knockback = 1.0
+isHitscan = true
+displayName = "M24"
+visual = ExtResource("2_cw0l5")
+ammo = 1
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"
