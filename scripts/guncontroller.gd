@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/shotgun.tres")
+var gun: GunResource = load("res://guns/ar15.tres")
 
 var visual: Node2D
 var muzzle
@@ -34,10 +34,17 @@ func setGun(newGun: GunResource):
 	ammo = gun.ammo
 
 func trace(a, b):
+	var fadeOut
+	
 	var tracer = Line2D.new()
 	tracer.antialiased = true
 	tracer.z_index = 2
-	tracer.default_color = Color8(255, 255, 255, 64)
+	if gun.tracerColour:
+		tracer.default_color = Color(gun.tracerColour)
+		fadeOut = Color.html(gun.tracerColourFade + "00")
+	else:
+		tracer.default_color = Color8(255, 255, 255, 64)
+		fadeOut = Color8(255, 255, 255, 0)
 	tracer.width = 2.0
 	tracer.clear_points()
 	tracer.add_point(a)
@@ -45,7 +52,12 @@ func trace(a, b):
 	get_tree().current_scene.add_child(tracer)
 
 	var tracerTween = get_tree().create_tween()
-	tracerTween.tween_property(tracer, "default_color", Color8(255, 255, 255, 0), 0.2)
+	tracerTween.tween_property(
+		tracer,
+		"default_color",
+		fadeOut,
+		0.2
+	)
 	tracerTween.finished.connect(func(): tracer.queue_free())
 
 func shoot():
@@ -117,12 +129,18 @@ func tryShoot():
 			var loadAmount = min(gun.burstSize, ammo)
 			burstAmmo = loadAmount
 			ammo -= loadAmount
+			if visual.has_method("onRefillBurstAmmo"):
+				visual.onRefillBurstAmmo()
 			
 		if burstAmmo <= 0:
 			print("no ammo")
+			if visual.has_method("onDryAmmo"):
+				visual.onDryAmmo()
 			return # empty mag die die die uh die
 		
 		shoot()
+		if visual.has_method("onShoot"):
+			visual.onShoot()
 		burstAmmo -= 1
 		
 		burstFireTime = now + gun.burstRate
@@ -139,13 +157,19 @@ func tryShoot():
 			var loadAmount = min(gun.burstSize, ammo)
 			burstAmmo = loadAmount
 			ammo -= loadAmount
+			if visual.has_method("onRefillBurstAmmo"):
+				visual.onRefillBurstAmmo()
 		
 		if ammo <= 0:
 			print("no ammo")
+			if visual.has_method("onDryAmmo"):
+				visual.onDryAmmo()
 			return
 		
 		for pellet in range(gun.bulletsPerShot):
 			shoot()
+			if visual.has_method("onShoot"):
+				visual.onShoot()
 			burstAmmo -= 1
 		fireTime = now + gun.rateOfFire
 	if now < fireTime:
@@ -153,10 +177,16 @@ func tryShoot():
 		
 	if ammo <= 0:
 		print("no ammo")
+		if visual.has_method("onDryAmmo"):
+				visual.onDryAmmo()
 		return
 	
 	ammo -= 1
 	shoot()
+	
+	if visual.has_method("onShoot"):
+		visual.onShoot()
+	
 	fireTime = now + gun.rateOfFire
 		
 	

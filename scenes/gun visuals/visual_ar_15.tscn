@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cyo87gtdaqx0e"]
+
+[ext_resource type="Script" uid="uid://iaag8ifhs88i" path="res://scripts/ar15Decals.gd" id="1_qbn50"]
+[ext_resource type="Texture2D" uid="uid://cy6cv1mcvfq2m" path="res://assets/sprites/guns/ar15.png" id="2_cftuk"]
+[ext_resource type="Texture2D" uid="uid://b2cidjubpulkh" path="res://assets/sprites/guns/ar15-decal.png" id="3_1frco"]
+
+[node name="visual-ar15" type="Node2D" unique_id=2023980622]
+position = Vector2(1.665, -0.91)
+script = ExtResource("1_qbn50")
+
+[node name="gun" type="Sprite2D" parent="." unique_id=1409920367]
+texture = ExtResource("2_cftuk")
+
+[node name="decals" type="Node2D" parent="." unique_id=925852998]
+
+[node name="heat" type="Sprite2D" parent="decals" unique_id=852146798]
+texture = ExtResource("3_1frco")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=1294059248]
+position = Vector2(7, 0.5)

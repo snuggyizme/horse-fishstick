@@ -1,16 +1,26 @@
 [gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://du67qs2sc7i7r"]
 
 [ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_37swe"]
+[ext_resource type="PackedScene" uid="uid://hj0256rq78x7" path="res://scenes/gun visuals/visual_05t_thanatos.tscn" id="2_hmhnu"]
 
 [resource]
 script = ExtResource("1_37swe")
-damage = 0.5
+damage = 6.0
 rateOfFire = 3.0
 rangeLimit = 60
 recoil = 0.4
 spread = 85.0
+tracerColour = "7640b8"
+tracerColourFade = "ff8080"
 knockback = 3.0
 isHitscan = true
 projectileSpeed = 69420
 displayName = "05t-THANATOS"
+visual = ExtResource("2_hmhnu")
+isBurst = true
+burstSize = 64
+burstRate = 69420.0
+ammo = 128
+bulletsPerShot = 64
+doBullertsPerShotWithBurstAmmo = true
 metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

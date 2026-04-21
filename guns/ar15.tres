@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://65g17lafumoq"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_kmdmc"]
+[ext_resource type="PackedScene" uid="uid://cyo87gtdaqx0e" path="res://scenes/gun visuals/visual_ar_15.tscn" id="2_q746d"]
+
+[resource]
+script = ExtResource("1_kmdmc")
+damage = 6.5
+rateOfFire = 0.07
+rangeLimit = 99999
+recoil = 0.5
+spread = 1.0
+knockback = 0.25
+auto = true
+isHitscan = true
+projectileSpeed = 69420
+displayName = "AR15"
+visual = ExtResource("2_q746d")
+burstSize = 69420
+burstRate = 69420.0
+ammo = 30
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

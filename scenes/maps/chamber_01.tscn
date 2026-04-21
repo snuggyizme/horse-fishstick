@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://cdxwohf1nk3s8" path="res://assets/tileset.tres" id="1_qibph"]
 [ext_resource type="PackedScene" uid="uid://dij03yxhvec7u" path="res://scenes/spawner.tscn" id="2_bdj28"]
-[ext_resource type="Resource" uid="uid://dc7qt5ungvyfe" path="res://guns/t-M0N.tres" id="3_agnfu"]
+[ext_resource type="Resource" uid="uid://du67qs2sc7i7r" path="res://guns/05t THANATOS.tres" id="3_bdj28"]
 [ext_resource type="Resource" uid="uid://bvtygt0imthr5" path="res://guns/desert-eagle.tres" id="4_liuyj"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lg23i"]
@@ -36,7 +36,7 @@ position = Vector2(350, 181)
 
 [node name="1" parent="spawners" unique_id=841179750 instance=ExtResource("2_bdj28")]
 position = Vector2(72, 72)
-gun = ExtResource("3_agnfu")
+gun = ExtResource("3_bdj28")
 
 [node name="2" parent="spawners" unique_id=491230946 instance=ExtResource("2_bdj28")]
 position = Vector2(160, 136)

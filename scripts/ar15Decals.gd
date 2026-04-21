@@ -1,0 +1,33 @@
+extends Node2D
+
+@onready var heat = $decals/heat
+
+var coolDownTime := 0.0
+var shotsRecently := 0
+
+var glowing = false
+
+func onShoot():
+	coolDownTime = Time.get_ticks_msec() + 930
+	shotsRecently += 1
+	
+func _process(_delta):
+	if shotsRecently == 0 and not glowing:
+		heat.modulate = Color(1, 1, 1, 0)
+	
+	if shotsRecently >= 5 and not glowing:
+		glowing = true
+		var glowTween = create_tween()
+		glowTween.tween_property(heat, "modulate", Color(3, 3, 3, 0.8), 0.1)
+		glowTween.set_ease(Tween.EASE_OUT)
+	
+	if Time.get_ticks_msec() > coolDownTime and shotsRecently > 0:
+		glowing = false
+		shotsRecently -= 1
+		
+		if shotsRecently <= 0:
+			shotsRecently = 0
+			glowing = false
+		
+		var glowTween = create_tween()
+		glowTween.tween_property(heat, "modulate", Color(2, 1, 1, 0), 0.3)
