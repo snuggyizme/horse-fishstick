@@ -28,5 +28,4 @@ func _process(_delta):
 			swapGuns(player)
 
 func swapGuns(player):
-	var oldGun = player.get_node("gunController").gun
 	player.get_node("gunController").setGun(gun)

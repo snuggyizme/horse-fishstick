@@ -57,7 +57,8 @@ func shoot():
 		direction = holyFuckTooManyAimingVariables
 	var end = start + direction.rotated(spreadRad) * gun.rangeLimit
 	
-	get_parent().nudge(holyFuckTooManyAimingVariables, 30)
+	get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 100)
+	#get_parent().nudge(Vector2.LEFT, 350)
 	var spaceState = get_world_2d().direct_space_state
 	
 	var query = PhysicsRayQueryParameters2D.create(start, end)

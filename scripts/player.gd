@@ -36,8 +36,9 @@ func teleportAndStop(pos: Vector2):
 	velocity = Vector2.ZERO
 	skip = true
 
-func nudge(direction, speed):
-	velocity += direction * speed
+func nudge(direction: Vector2, speed):
+	velocity += -direction * speed
+	print(direction)
 	
 func hurt(damage: float):
 	hp -= damage
