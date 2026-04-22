@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://ba8v74pgx3dxf"]
+
+[ext_resource type="Script" uid="uid://cs2wg7t5qp21m" path="res://scripts/minigunDecals.gd" id="1_jejis"]
+[ext_resource type="Texture2D" uid="uid://oce4xjt2wuew" path="res://assets/sprites/guns/minigun.png" id="2_yco7r"]
+[ext_resource type="Texture2D" uid="uid://dtman8j4i0cjv" path="res://assets/sprites/guns/minigun-heat.png" id="3_5n1nk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5exgq"]
+atlas = ExtResource("2_yco7r")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qapc8"]
+atlas = ExtResource("2_yco7r")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_741do"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5exgq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qapc8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 25.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cj8y"]
+atlas = ExtResource("3_5n1nk")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s85i"]
+atlas = ExtResource("3_5n1nk")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f10oa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cj8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8s85i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 25.0
+}]
+
+[node name="visual-minigun" type="Node2D" unique_id=858832772]
+script = ExtResource("1_jejis")
+
+[node name="minigun" type="AnimatedSprite2D" parent="." unique_id=1320705636]
+sprite_frames = SubResource("SpriteFrames_741do")
+autoplay = "default"
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=1546838680]
+position = Vector2(13, -1.5)
+
+[node name="decals" type="Node2D" parent="." unique_id=741619555]
+
+[node name="heat" type="AnimatedSprite2D" parent="decals" unique_id=1801238294]
+sprite_frames = SubResource("SpriteFrames_f10oa")
+autoplay = "default"

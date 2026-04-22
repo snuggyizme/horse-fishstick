@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/m24.tres")
+var gun: GunResource = load("res://guns/minigun.tres")
 
 var visual: Node2D
 var muzzle
@@ -34,7 +34,6 @@ func setGun(newGun: GunResource):
 	ammo = gun.ammo
 
 func trace(a, b):
-	print("shot used tracer")
 	var fadeOut
 	
 	var tracer = Line2D.new()
@@ -79,9 +78,7 @@ func shoot():
 	muzzleQuery.collide_with_areas = true
 	muzzleQuery.collide_with_bodies = true
 	muzzleQuery.exclude = [get_parent()]
-	muzzleQuery.collision_mask = 1
-	print("point collide request (point blank)")
-	
+	muzzleQuery.collision_mask = 1	
 	
 	var muzzleResults = spaceState.intersect_point(muzzleQuery)
 	if muzzleResults.size() > 0:
@@ -99,8 +96,8 @@ func shoot():
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
 	query.exclude = [get_parent()]
+	query.hit_from_inside = true
 	query.collision_mask = 1
-	print("raycast")
 	
 	var result = spaceState.intersect_ray(query)
 	

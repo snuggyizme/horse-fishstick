@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://bg06wlfnlpxup"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_pljnu"]
+[ext_resource type="PackedScene" uid="uid://ba8v74pgx3dxf" path="res://scenes/gun visuals/visual_minigun.tscn" id="2_4joge"]
+
+[resource]
+script = ExtResource("1_pljnu")
+damage = 2.5
+rateOfFire = 0.06
+rangeLimit = 145
+recoil = 0.75
+spread = 17.5
+tracerColour = "ffcf8c"
+tracerColourFade = "ffa78c"
+overrideTracers = true
+knockback = 1.1
+auto = true
+displayName = "minigun"
+visual = ExtResource("2_4joge")
+ammo = 105
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"
