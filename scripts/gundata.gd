@@ -7,11 +7,16 @@ class_name GunResource
 @export var rangeLimit: int # pixels
 @export var recoil: float # percent
 @export var spread: float # degrees
+@export var knockback: float # percent
+@export var auto: bool # click spam or hold
+
+@export_category("Tracers")
 @export var tracerColour: String # hex no hashtag
 @export var tracerColourFade: String # hex no hastag
 @export var overrideTracers: bool
-@export var knockback: float # percent
-@export var auto: bool # click spam or hold
+@export var doTracersGlow: bool
+@export var fadeTime: float
+@export var overrideFade: bool
 
 @export_category("Hitscan / Projectile")
 @export var isHitscan: bool

@@ -5,19 +5,22 @@
 
 [resource]
 script = ExtResource("1_al7oo")
-damage = 8.0
+damage = 14.5
 rateOfFire = 0.45
 rangeLimit = 99999
 recoil = 1.6
-tracerColour = "4287f5"
-tracerColourFade = "4ef542"
-overrideTracers = true
 knockback = 5.0
 auto = true
+tracerColour = "0000ff"
+tracerColourFade = "8eff00"
+overrideTracers = true
+doTracersGlow = true
+fadeTime = 0.1
+overrideFade = true
 isHitscan = true
 projectileSpeed = 69
 useShapeCast = true
-LaserSize = 3
+LaserSize = 5
 displayName = "ZAPPA"
 visual = ExtResource("2_4tk3w")
 burstSize = 69

@@ -35,6 +35,7 @@ func setGun(newGun: GunResource):
 
 func trace(a, b, width=2.0):
 	var fadeOut
+	var fadeTime = 0.2
 	
 	var tracer = Line2D.new()
 	tracer.antialiased = true
@@ -45,18 +46,23 @@ func trace(a, b, width=2.0):
 	else:
 		tracer.default_color = Color8(255, 255, 255, 64)
 		fadeOut = Color8(255, 255, 255, 0)
+	if gun.doTracersGlow:
+		tracer.default_color = tracer.default_color.blend(Color(2, 2, 2))
+	if gun.overrideFade:
+		fadeTime = gun.fadeTime
+	
 	tracer.width = width
 	tracer.clear_points()
 	tracer.add_point(a)
 	tracer.add_point(b)
-	get_tree().current_scene.add_child(tracer)
+	get_tree().current_scene.add_child(tracer)	
 	
 	var tracerTween = get_tree().create_tween()
 	tracerTween.tween_property(
 		tracer,
 		"default_color",
 		fadeOut,
-		0.2
+		fadeTime
 	)
 	tracerTween.finished.connect(func(): tracer.queue_free())
 
@@ -93,32 +99,30 @@ func shoot():
 		return
 	
 	if gun.useShapeCast:
-		var shapeQuery = ShapeCast2D.new()
-		add_child(shapeQuery)
-		
 		var shape = CircleShape2D.new()
-		shape.radius = gun.LaserSize
-		shapeQuery.shape = shape
+		shape.radius = gun.LaserSize / 2.0 # laserSize is circumf
 		
-		shapeQuery.target_position = end
-		shapeQuery.enabled = true
-		shapeQuery.collision_mask = 1
-		shapeQuery.exclude_parent = true
+		@warning_ignore("confusable_local_declaration")
+		var query = PhysicsShapeQueryParameters2D.new()
+		query.shape = shape
+		query.transform = Transform2D(0, start)
+		query.motion = direction.rotated(spreadRad) * gun.rangeLimit
 		
-		shapeQuery.force_shapecast_update()
+		query.collide_with_areas = true
+		query.collide_with_bodies = true
+		query.exclude = [get_parent()]
+		query.collision_mask = 1
 		
-		if shapeQuery.is_colliding():
-			print("colide")
-			var hitCount = shapeQuery.get_collision_count()
-			
-			for hit in range(hitCount):
-				var collider = shapeQuery.get_collider(hit)
+		var results = spaceState.intersect_shape(query)
+		
+		if results.size() > 0:
+			for result in results:
+				var collider = result.collider
 				if collider.has_method("hurt"):
 					collider.hurt(gun.damage)
 					collider.nudge(-direction, gun.knockback * 50)
-				
-				trace(start, end, 6)
-				print("traced")
+		
+		trace(start, end, gun.LaserSize)
 		return
 	
 	var query = PhysicsRayQueryParameters2D.create(start, end)
