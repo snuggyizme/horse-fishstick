@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://k8rhykbp6lqg"]
+
+[ext_resource type="Texture2D" uid="uid://celartwcsmepx" path="res://assets/sprites/guns/clip.png" id="1_nnl4h"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nnl4h"]
+bounce = 0.18
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7h10w"]
+size = Vector2(2, 3.3333335)
+
+[node name="clip" type="Node2D" unique_id=2142409316]
+
+[node name="rigidbody" type="RigidBody2D" parent="." unique_id=236391344]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_nnl4h")
+gravity_scale = 0.9
+
+[node name="sprite" type="Sprite2D" parent="rigidbody" unique_id=1854246382]
+texture = ExtResource("1_nnl4h")
+
+[node name="shape" type="CollisionShape2D" parent="rigidbody" unique_id=300731336]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_7h10w")

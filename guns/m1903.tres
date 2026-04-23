@@ -18,4 +18,5 @@ displayName = "M1903"
 visual = ExtResource("2_qwx1k")
 ammo = 5
 shootSound = 2
+doKaping = true
 metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

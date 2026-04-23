@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/m1903.tres")
+var gun: GunResource = load("res://guns/dp12.tres")
 
 var visual: Node2D
 var muzzle
@@ -19,8 +19,11 @@ var sounds = {
 	"shot": [
 		"light", # temp for index
 		"medium", #temp for index
-		load("res://assets/sfx/weapons/heavyGunshot.ogg")
-	]
+		load("res://assets/sfx/weapons/heavyGunshot.ogg"),
+		"shotty light", # temp index
+		load("res://assets/sfx/weapons/shotgunHeavy.ogg")
+	],
+	"kaping": load("res://assets/sfx/weapons/kaping.ogg")
 }
 
 func _ready():
@@ -74,11 +77,30 @@ func trace(a, b, width=2.0):
 	)
 	tracerTween.finished.connect(func(): tracer.queue_free())
 
-func shoot():
-	if gun.shootSound:
-		$AudioStreamPlayer2D.stream = sounds["shot"][gun.shootSound]
-		$AudioStreamPlayer2D.play()
+func kapingIt():
+	var kapinger = AudioStreamPlayer2D.new()
+	kapinger.stream = sounds["kaping"]
+	add_child(kapinger)
+	await get_tree().create_timer(0.4).timeout
+	kapinger.play()
 	
+	if visual.has_method("ejectShell"):
+		visual.ejectShell()
+
+func shootSoundSpecific():
+	var soundDevice = AudioStreamPlayer2D.new()
+	soundDevice.stream = sounds["shot"][gun.shootSound]
+	add_child(soundDevice)
+	soundDevice.play()
+
+func shootSound():
+	if gun.shootSound:
+		shootSoundSpecific()
+		
+	if gun.doKaping:
+		kapingIt()
+
+func shoot():
 	var spreadRad = deg_to_rad(randf_range(-gun.spread, gun.spread))
 	
 	var start = muzzle.global_position
@@ -107,7 +129,7 @@ func shoot():
 				collider.hurt(gun.damage)
 				collider.nudge(-direction, gun.knockback * 50)
 				
-		print("point blank")
+		#print("point blank")
 		flash(start, holyFuckTooManyAimingVariables)
 		return
 	
@@ -186,6 +208,7 @@ func tryShoot():
 			return # empty mag die die die uh die
 		
 		shoot()
+		shootSound()
 		if visual.has_method("onShoot"):
 			visual.onShoot()
 		burstAmmo -= 1
@@ -215,10 +238,14 @@ func tryShoot():
 		
 		for pellet in range(gun.bulletsPerShot):
 			shoot()
+			
 			if visual.has_method("onShoot"):
 				visual.onShoot()
 			burstAmmo -= 1
+		shootSound()
 		fireTime = now + gun.rateOfFire
+		
+	# normal gun or normal shotgun
 	if now < fireTime:
 		return
 		
@@ -229,7 +256,14 @@ func tryShoot():
 		return
 	
 	ammo -= 1
-	shoot()
+	
+	if not gun.doBullertsPerShotWithBurstAmmo:
+		shoot()
+		shootSound()
+	else:
+		for pellet in range(gun.bulletsPerShot):
+			shoot()
+		shootSound()
 	
 	if visual.has_method("onShoot"):
 		visual.onShoot()

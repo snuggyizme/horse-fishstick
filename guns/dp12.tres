@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://r3nrlylcsekc"]
 
 [ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_5qrcb"]
+[ext_resource type="PackedScene" uid="uid://cnh4s3gq2ke7i" path="res://scenes/gun visuals/visual_dp_12.tscn" id="2_754gb"]
 
 [resource]
 script = ExtResource("1_5qrcb")
@@ -13,7 +14,9 @@ knockback = 0.7
 auto = true
 fadeTime = 0.3
 displayName = "DP 12"
+visual = ExtResource("2_754gb")
 ammo = 12
 bulletsPerShot = 16
 doBullertsPerShotWithBurstAmmo = true
+shootSound = 4
 metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

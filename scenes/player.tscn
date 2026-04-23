@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bqs5rm41kplub" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://vcvb635hpykg" path="res://assets/sprites/testguy.png" id="2_g2els"]
 [ext_resource type="Script" uid="uid://crwiknpaaxsly" path="res://scripts/guncontroller.gd" id="3_qhqgy"]
-[ext_resource type="AudioStream" uid="uid://dwx7vr0cu7wej" path="res://assets/sfx/weapons/heavyGunshot.ogg" id="4_dqkch"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 5.0
@@ -42,6 +41,3 @@ debug_color = Color(0.6537394, 0.5177267, 0.05323176, 0.41960785)
 
 [node name="gunController" type="Node2D" parent="." unique_id=1865751482]
 script = ExtResource("3_qhqgy")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="gunController" unique_id=1456168344]
-stream = ExtResource("4_dqkch")

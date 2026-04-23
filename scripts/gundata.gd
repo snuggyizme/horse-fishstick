@@ -42,5 +42,6 @@ class_name GunResource
 
 @export_category("SFX")
 @export_enum(
-	"LIGHT", "MEDIUM", "HEAVY", "POWER_LIGHT", "POWER_MEDIUM", "POWER_HEAVY", "LASER_HEAVY"
+	"LIGHT", "MEDIUM", "HEAVY", "SHOTGUN_LIGHT", "SHOTGUN_HEAVY", "POWER_LIGHT", "POWER_MEDIUM", "POWER_HEAVY", "LASER_HEAVY"
 ) var shootSound # yep thats right I LOVE YOU CY4
+@export var doKaping: bool # kaping
