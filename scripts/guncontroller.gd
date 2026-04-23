@@ -48,6 +48,18 @@ func _onProjectileHit(gunUsed: GunResource, normal: Vector2, positron: Vector2):
 			explosion.explode(normal)
 			explosion.global_position = positron
 			get_tree().current_scene.add_child(explosion)
+			
+			var spaceState = get_world_2d().direct_space_state
+			var results = spaceState.intersect_shape(explosion.get_node("ShapeCast2D"))
+		
+			if results.size() > 0:
+				for result in results:
+					var collider = result.collider
+					if collider.has_method("hurt"):
+						collider.hurt(40)
+						collider.nudge(normal, gun.knockback * 50)
+						
+						print("explosion hit and pushed")
 
 func setGun(newGun: GunResource):
 	gun = newGun
