@@ -108,6 +108,7 @@ func shoot():
 		shapeQuery.force_shapecast_update()
 		
 		if shapeQuery.is_colliding():
+			print("colide")
 			var hitCount = shapeQuery.get_collision_count()
 			
 			for hit in range(hitCount):
@@ -117,6 +118,7 @@ func shoot():
 					collider.nudge(-direction, gun.knockback * 50)
 				
 				trace(start, end, 6)
+				print("traced")
 		return
 	
 	var query = PhysicsRayQueryParameters2D.create(start, end)
