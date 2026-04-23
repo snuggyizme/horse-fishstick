@@ -1,5 +1,7 @@
 extends Node2D
 
+const damage = 33.5
+
 const speedParticles = 15
 const speedFire = 3
 const speedSmoke = 2

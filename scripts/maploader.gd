@@ -21,6 +21,7 @@ const maps = [
 	{"name": "temple_01", "group": "temple"},
 	{"name": "store_01", "group": "store"},
 	{"name": "openair_01", "group": "openair"},
+	{"name": "openair_02", "group": "openair"},
 	
 ]
 
