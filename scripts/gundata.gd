@@ -16,6 +16,8 @@ class_name GunResource
 @export_category("Hitscan / Projectile")
 @export var isHitscan: bool
 @export var projectileSpeed: int # only if isHitscan=false. pix/sec
+@export var useShapeCast: bool # true= a wide projectile. false= 1pix/exact
+@export var LaserSize: int # only true if useShapeCast=true. pix
 
 @export_category("Visuals")
 @export var displayName: String

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b7t057ixmr3ie"]
+
+[ext_resource type="Texture2D" uid="uid://dw2c67tvbbb5o" path="res://assets/sprites/guns/zapper.png" id="1_ro5h3"]
+
+[node name="visual-zappa" type="Node2D" unique_id=1211172640]
+
+[node name="gun" type="Sprite2D" parent="." unique_id=145483135]
+texture = ExtResource("1_ro5h3")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=431930023]
+position = Vector2(4, 1)

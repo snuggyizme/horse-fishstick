@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/minigun.tres")
+var gun: GunResource = load("res://guns/zapper.tres")
 
 var visual: Node2D
 var muzzle
@@ -33,7 +33,7 @@ func setGun(newGun: GunResource):
 	burstAmmo = gun.burstSize
 	ammo = gun.ammo
 
-func trace(a, b):
+func trace(a, b, width=2.0):
 	var fadeOut
 	
 	var tracer = Line2D.new()
@@ -45,7 +45,7 @@ func trace(a, b):
 	else:
 		tracer.default_color = Color8(255, 255, 255, 64)
 		fadeOut = Color8(255, 255, 255, 0)
-	tracer.width = 2.0
+	tracer.width = width
 	tracer.clear_points()
 	tracer.add_point(a)
 	tracer.add_point(b)
@@ -78,7 +78,7 @@ func shoot():
 	muzzleQuery.collide_with_areas = true
 	muzzleQuery.collide_with_bodies = true
 	muzzleQuery.exclude = [get_parent()]
-	muzzleQuery.collision_mask = 1	
+	muzzleQuery.collision_mask = 1
 	
 	var muzzleResults = spaceState.intersect_point(muzzleQuery)
 	if muzzleResults.size() > 0:
@@ -90,6 +90,33 @@ func shoot():
 				collider.nudge(-direction, gun.knockback * 50)
 				
 		#print("point blank")
+		return
+	
+	if gun.useShapeCast:
+		var shapeQuery = ShapeCast2D.new()
+		add_child(shapeQuery)
+		
+		var shape = CircleShape2D.new()
+		shape.radius = gun.LaserSize
+		shapeQuery.shape = shape
+		
+		shapeQuery.target_position = end
+		shapeQuery.enabled = true
+		shapeQuery.collision_mask = 1
+		shapeQuery.exclude_parent = true
+		
+		shapeQuery.force_shapecast_update()
+		
+		if shapeQuery.is_colliding():
+			var hitCount = shapeQuery.get_collision_count()
+			
+			for hit in range(hitCount):
+				var collider = shapeQuery.get_collider(hit)
+				if collider.has_method("hurt"):
+					collider.hurt(gun.damage)
+					collider.nudge(-direction, gun.knockback * 50)
+				
+				trace(start, end, 6)
 		return
 	
 	var query = PhysicsRayQueryParameters2D.create(start, end)
