@@ -15,6 +15,14 @@ var ammo: int
 
 var holyFuckTooManyAimingVariables
 
+var sounds = {
+	"shot": [
+		"light", # temp for index
+		"medium", #temp for index
+		load("res://assets/sfx/weapons/heavyGunshot.ogg")
+	]
+}
+
 func _ready():
 	setGun(gun)
 
@@ -67,6 +75,10 @@ func trace(a, b, width=2.0):
 	tracerTween.finished.connect(func(): tracer.queue_free())
 
 func shoot():
+	if gun.shootSound:
+		$AudioStreamPlayer2D.stream = sounds["shot"][gun.shootSound]
+		$AudioStreamPlayer2D.play()
+	
 	var spreadRad = deg_to_rad(randf_range(-gun.spread, gun.spread))
 	
 	var start = muzzle.global_position
@@ -95,7 +107,7 @@ func shoot():
 				collider.hurt(gun.damage)
 				collider.nudge(-direction, gun.knockback * 50)
 				
-		#print("point blank")
+		print("point blank")
 		flash(start, holyFuckTooManyAimingVariables)
 		return
 	
@@ -135,7 +147,7 @@ func shoot():
 	
 	var result = spaceState.intersect_ray(query)
 	
-	flash(start, facingDirection)
+	flash(start, holyFuckTooManyAimingVariables)
 	
 	#print("dir:", str(direction.rotated(spreadRad)) + "\n" + str(result) + "\n" + str(query))
 	
@@ -230,10 +242,14 @@ func flash(pos, dir):
 	mFlash.set_texture(load("res://assets/sprites/muzzle-flash.png"))
 	mFlash.global_position = pos
 	match dir:
-		"left":
-			mFlash.flip_h = true
-		"right":
-			mFlash.flip_h = false
+		Vector2.LEFT:
+			mFlash.rotation_degrees = 180
+		Vector2.RIGHT:
+			mFlash.rotation_degrees = 0
+		Vector2.DOWN:
+			mFlash.rotation_degrees = 90
+		Vector2.UP:
+			mFlash.rotation_degrees = 270
 	
 	get_tree().current_scene.add_child(mFlash)
 	
@@ -244,12 +260,19 @@ func flash(pos, dir):
 
 func _process(_delta: float) -> void:
 	var yAim = get_parent().yAim
+	var fD = get_parent().facingDirection
 	if not get_parent().aimingX:
 		if yAim > 0:
-			visual.rotation_degrees = 90
+			if fD == Vector2.LEFT:
+				visual.rotation_degrees = -90
+			else:
+				visual.rotation_degrees = 90
 			holyFuckTooManyAimingVariables = Vector2.DOWN
 		elif yAim < 0:
-			visual.rotation_degrees = -90
+			if fD == Vector2.LEFT:
+				visual.rotation_degrees = 90
+			else:
+				visual.rotation_degrees = -90
 			holyFuckTooManyAimingVariables = Vector2.UP
 		else:
 			visual.rotation_degrees = 0
@@ -258,17 +281,11 @@ func _process(_delta: float) -> void:
 		visual.rotation_degrees = 0
 		holyFuckTooManyAimingVariables = get_parent().facingDirection
 	
-	if facingDirection == "left":
-		visual.rotation = -visual.rotation
-		
 	if (Input.is_action_just_pressed(get_parent().inputPrefix + "shoot") and gun.auto == false) or (Input.is_action_pressed(get_parent().inputPrefix + "shoot") and gun.auto == true):
 		tryShoot()
-		
-	if get_parent().facingDirection == Vector2.RIGHT and facingDirection == "left":
-		facingDirection = "right"
-		visual.scale.x = 1
-		visual.position = gunPos
-	elif get_parent().facingDirection == Vector2.LEFT and facingDirection == "right":
-		facingDirection = "left"
+	
+	visual.scale.x = 1
+	visual.position = gunPos
+	if get_parent().facingDirection == Vector2.LEFT:
 		visual.scale.x = -1
 		visual.position = -gunPos

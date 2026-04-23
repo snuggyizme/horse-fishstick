@@ -19,8 +19,8 @@ class_name GunResource
 @export var overrideFade: bool
 
 @export_category("Hitscan / Projectile")
-@export var isHitscan: bool
-@export var projectileSpeed: int # only if isHitscan=false. pix/sec
+@export var isProjectile: bool
+@export var projectileSpeed: int # only if isProjectile=true. pix/sec
 @export var useShapeCast: bool # true= a wide projectile. false= 1pix/exact
 @export var LaserSize: int # only true if useShapeCast=true. pix
 
@@ -39,3 +39,8 @@ class_name GunResource
 @export_category("Shotgun")
 @export var bulletsPerShot: int # shotgun
 @export var doBullertsPerShotWithBurstAmmo: bool # if so, the shotgun will consume the ammo of the burst to fire it. if false, the shotgun will fire bulletsPerShot and take 1 ammo.
+
+@export_category("SFX")
+@export_enum(
+	"LIGHT", "MEDIUM", "HEAVY", "POWER_LIGHT", "POWER_MEDIUM", "POWER_HEAVY", "LASER_HEAVY"
+) var shootSound # yep thats right I LOVE YOU CY4

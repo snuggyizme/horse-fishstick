@@ -9,20 +9,53 @@ func _ready() -> void:
 
 func updateSprite():
 	if gun and gun.visual:
-		if gun.visual.get_node("gun") is Sprite2D:
-			var instance = gun.visual.instantiate()
-			var gunSprite = instance.get_node("gun")
-			if instance.has_node("decals"):
-				for decal in instance.get_node("decals").get_children():
-					var decalSprite = Sprite2D.new()
+		var instance = gun.visual.instantiate()
+		var gunSprite = instance.get_node_or_null("gun")
+		if gunSprite == null:
+			print("You forgot a gun in the visual: ", gun.visual)
+			return
+		if instance.has_node("decals") and false: # decals off, i dont think we should have them
+			for decal in instance.get_node("decals").get_children():
+				var decalSprite
+				
+				if decal is Sprite2D:
+					decalSprite = Sprite2D.new()
 					decalSprite.texture = decal.texture
-					decalSprite.name = "decal (" +	gun.displayName + ") " + str(randi_range(100, 999))
-					self.add_child(decalSprite)
-			$gun.texture = gunSprite.texture
-			instance.queue_free()
-		elif gun.visual.get_node("gun") is AnimatedSprite2D:
-			var instance = gun.visual.instantiate()
-			var gunSprite = instance #aaa
+				
+				elif decal is AnimatedSprite2D:
+					decalSprite = AnimatedSprite2D.new()
+					var spriteFrames = SpriteFrames.new()
+					spriteFrames.add_animation("default")
+					for frame in range(decal.sprite_frames.get_frame_count("default")):
+						spriteFrames.add_frame(
+							"default",
+							decal.sprite_frames.get_frame_texture("default", frame),
+							decal.sprite_frames.get_frame_duration("default", frame)
+						)
+					decalSprite.sprite_frames = spriteFrames
+					decalSprite.autoplay = "default"
+				
+				decalSprite.name = decal.name
+				self.add_child(decalSprite)
+		if gunSprite is AnimatedSprite2D:
+			var gunDisplay = AnimatedSprite2D.new()
+			gunDisplay.sprite_frames = SpriteFrames.new()
+			gunDisplay.autoplay = "default"
+			for frame in range(gunSprite.sprite_frames.get_frame_count("default")):
+				gunDisplay.sprite_frames.add_frame(
+					"default",
+					gunSprite.sprite_frames.get_frame_texture("default", frame),
+					gunSprite.sprite_frames.get_frame_duration("default", frame)
+				)
+			gunDisplay.name = "display_gun"
+			add_child(gunDisplay)
+		else:
+			var gunDisplay = Sprite2D.new()
+			gunDisplay.texture = gunSprite.texture
+			gunDisplay.name = "display_gun"
+			add_child(gunDisplay)
+			
+		instance.queue_free()
 	
 func bodyEntered(body: Node2D) -> void:
 	if body.is_in_group("players") and body not in playersInRange:

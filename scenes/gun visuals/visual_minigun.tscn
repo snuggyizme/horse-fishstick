@@ -51,7 +51,7 @@ animations = [{
 [node name="visual-minigun" type="Node2D" unique_id=858832772]
 script = ExtResource("1_jejis")
 
-[node name="minigun" type="AnimatedSprite2D" parent="." unique_id=1320705636]
+[node name="gun" type="AnimatedSprite2D" parent="." unique_id=1320705636]
 sprite_frames = SubResource("SpriteFrames_741do")
 autoplay = "default"
 

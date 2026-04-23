@@ -49,8 +49,6 @@ collision_layer = 4
 [node name="EEGGBJBHAHAHAHGAGA" type="CollisionShape2D" parent="range" unique_id=1954295270]
 shape = SubResource("CircleShape2D_tx2ig")
 
-[node name="gun" type="Sprite2D" parent="." unique_id=127340524]
-
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1070575241]
 position = Vector2(5, 4)
 
