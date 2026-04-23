@@ -63,3 +63,6 @@ position = Vector2(13, -1.5)
 [node name="heat" type="AnimatedSprite2D" parent="decals" unique_id=1801238294]
 sprite_frames = SubResource("SpriteFrames_f10oa")
 autoplay = "default"
+
+[node name="casingSpawner" type="Marker2D" parent="." unique_id=510586961]
+position = Vector2(-6, 1)

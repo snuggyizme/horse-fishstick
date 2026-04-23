@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://5os15auik6ey"]
+
+[ext_resource type="Texture2D" uid="uid://th247880fbr6" path="res://assets/sprites/guns/bulletcasing.png" id="1_5rmea"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5rmea"]
+bounce = 0.39
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0kfm"]
+size = Vector2(2, 0.5)
+
+[node name="casing" type="Node2D" unique_id=1559466672]
+
+[node name="rigidbody" type="RigidBody2D" parent="." unique_id=1079449627]
+physics_material_override = SubResource("PhysicsMaterial_5rmea")
+
+[node name="sprite" type="Sprite2D" parent="rigidbody" unique_id=795175647]
+texture = ExtResource("1_5rmea")
+
+[node name="shape" type="CollisionShape2D" parent="rigidbody" unique_id=641480674]
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_c0kfm")
