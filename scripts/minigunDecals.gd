@@ -38,7 +38,7 @@ func bulletCasing():
 	var casing = load("res://scenes/casing.tscn").instantiate()
 	get_tree().current_scene.add_child(casing)
 	casing.global_position = $casingSpawner.global_position
-	casing.get_node("rigidbody").apply_force(Vector2(-1, -500))
+	casing.get_node("rigidbody").apply_force(Vector2(-15, 500))
 	
 	var tween = create_tween()
 	tween.tween_property(casing, "modulate:a", 0, 3)
