@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://csu0307mgaiml"]
 
 [ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_fgtt1"]
+[ext_resource type="PackedScene" uid="uid://bv4cnl3i5mgxf" path="res://scenes/gun visuals/visual_m1903.tscn" id="2_qwx1k"]
 
 [resource]
 script = ExtResource("1_fgtt1")
@@ -15,5 +16,6 @@ doTracersGlow = true
 isHitscan = true
 projectileSpeed = 69420
 displayName = "M1903"
+visual = ExtResource("2_qwx1k")
 ammo = 5
 metadata/_custom_type_script = "uid://b0c2pvngg4dqi"
