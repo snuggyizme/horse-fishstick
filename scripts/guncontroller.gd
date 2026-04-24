@@ -107,7 +107,6 @@ func shootSound():
 		kapingIt()
 
 func shoot():
-	print(get_parent())
 	var spreadRad = deg_to_rad(randf_range(-gun.spread, gun.spread))
 	
 	var start = muzzle.global_position
@@ -224,6 +223,7 @@ func tryShoot():
 				visual.onDryAmmo()
 			return # empty mag die die die uh die
 		
+		print("shot - source: burst gun ", gun.displayName)
 		shoot()
 		shootSound()
 		if visual.has_method("onShoot"):
@@ -253,6 +253,7 @@ func tryShoot():
 				visual.onDryAmmo()
 			return
 		
+		print("shot - source: burst shotgun ", gun.displayName)
 		for pellet in range(gun.bulletsPerShot):
 			shoot()
 			
@@ -269,17 +270,19 @@ func tryShoot():
 	if ammo <= 0:
 		print("no ammo")
 		if visual.has_method("onDryAmmo"):
-				visual.onDryAmmo()
+			visual.onDryAmmo()
 		return
 	
 	ammo -= 1
 	
 	if not gun.doBullertsPerShotWithBurstAmmo:
+		print("shot - source: gun ", gun.displayName)
 		shoot()
 		shootSound()
 	else:
 		for pellet in range(gun.bulletsPerShot):
 			shoot()
+		print("shot - source: shotgun ", gun.displayName)
 		shootSound()
 	
 	if visual.has_method("onShoot"):
@@ -287,7 +290,6 @@ func tryShoot():
 	
 	fireTime = now + gun.rateOfFire
 		
-	
 func flash(pos, dir):
 	var mFlash = Sprite2D.new()
 	mFlash.set_texture(load("res://assets/sprites/muzzle-flash.png"))

@@ -6,13 +6,13 @@
 [resource]
 script = ExtResource("1_knyjo")
 damage = 1.0
-rateOfFire = 60.0
+rateOfFire = 1.3
 rangeLimit = 144
-recoil = 1.0
+recoil = 0.1
 spread = 7.0
-knockback = 3.0
+knockback = 0.3
 auto = true
-displayName = "Sawed Off"
+displayName = "Sawed Off Shotgun"
 visual = ExtResource("2_1kiuj")
 ammo = 4
 bulletsPerShot = 56
