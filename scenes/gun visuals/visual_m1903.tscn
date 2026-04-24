@@ -12,5 +12,5 @@ texture = ExtResource("1_leqbj")
 [node name="muzzle" type="Marker2D" parent="." unique_id=1696791420]
 position = Vector2(14, -0.5)
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=2004181906]
+[node name="casingSpawner" type="Marker2D" parent="." unique_id=2004181906]
 position = Vector2(-4, 0)

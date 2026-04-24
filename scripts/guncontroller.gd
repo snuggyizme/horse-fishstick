@@ -96,6 +96,7 @@ func shoot():
 				collider.nudge(-direction, gun.knockback * 50)
 				
 		#print("point blank")
+		flash(start, holyFuckTooManyAimingVariables)
 		return
 	
 	if gun.useShapeCast:
