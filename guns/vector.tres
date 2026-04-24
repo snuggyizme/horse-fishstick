@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("1_q5ccl")
-damage = 8.0
-rateOfFire = 0.45
+damage = 6.5
+rateOfFire = 0.35
 rangeLimit = 360
-recoil = 0.75
+recoil = -60.0
 spread = 0.75
 knockback = 0.8
 auto = true
