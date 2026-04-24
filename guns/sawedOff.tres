@@ -5,16 +5,16 @@
 
 [resource]
 script = ExtResource("1_knyjo")
-damage = 0.5
+damage = 1.0
 rateOfFire = 60.0
-rangeLimit = 32
-recoil = 10.0
-spread = 67.0
+rangeLimit = 144
+recoil = 1.0
+spread = 7.0
 knockback = 3.0
 auto = true
 displayName = "Sawed Off"
 visual = ExtResource("2_1kiuj")
-ammo = 1
+ammo = 4
 bulletsPerShot = 56
 doBullertsPerShotWithBurstAmmo = true
 shootSound = 4

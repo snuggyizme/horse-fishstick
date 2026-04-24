@@ -26,6 +26,12 @@ var sounds = {
 	"kaping": load("res://assets/sfx/weapons/kaping.ogg")
 }
 
+@onready var excludes = [
+	get_parent(),
+	get_node("../headhurtbox"), get_node("../headhurtbox/head"),
+	get_node("../bodyhurtbox"), get_node("../bodyhurtbox/body"),
+]
+
 func _ready():
 	setGun(gun)
 
@@ -101,6 +107,7 @@ func shootSound():
 		kapingIt()
 
 func shoot():
+	print(get_parent())
 	var spreadRad = deg_to_rad(randf_range(-gun.spread, gun.spread))
 	
 	var start = muzzle.global_position
@@ -117,7 +124,7 @@ func shoot():
 	muzzleQuery.position = start
 	muzzleQuery.collide_with_areas = true
 	muzzleQuery.collide_with_bodies = true
-	muzzleQuery.exclude = [get_parent()]
+	muzzleQuery.exclude = excludes
 	muzzleQuery.collision_mask = 1
 	
 	var muzzleResults = spaceState.intersect_point(muzzleQuery)
@@ -125,13 +132,17 @@ func shoot():
 		for hit in muzzleResults:
 			var collider = hit.collider
 			
+			if collider in excludes:
+				print("pah")
+				continue
+			
 			if collider.has_method("hurt"):
 				collider.hurt(gun.damage)
 				collider.nudge(-direction, gun.knockback * 50)
 				
-		print("point blank")
-		flash(start, holyFuckTooManyAimingVariables)
-		return
+				print("point blank")
+				flash(start, holyFuckTooManyAimingVariables)
+				return
 	
 	if gun.useShapeCast:
 		var shape = CircleShape2D.new()
@@ -145,7 +156,7 @@ func shoot():
 		
 		query.collide_with_areas = true
 		query.collide_with_bodies = true
-		query.exclude = [get_parent()]
+		query.exclude = excludes
 		query.collision_mask = 1
 		
 		var results = spaceState.intersect_shape(query)
@@ -163,7 +174,7 @@ func shoot():
 	var query = PhysicsRayQueryParameters2D.create(start, end)
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
-	query.exclude = [get_parent()]
+	query.exclude = excludes
 	query.hit_from_inside = true
 	query.collision_mask = 1
 	
@@ -174,12 +185,17 @@ func shoot():
 	#print("dir:", str(direction.rotated(spreadRad)) + "\n" + str(result) + "\n" + str(query))
 	
 	if result:
-		print("hit")
 		trace(start, result["position"])
 		
 		var hit = result["collider"]
 		
+		#print("hit:")
+		#print(hit)
+		#print(hit.get_class())
+		#print(hit.name)
+		
 		if hit.has_method("hurt"):
+			print("hit player")
 			hit.hurt(gun.damage)
 			hit.nudge(-direction, gun.knockback * 50)
 	else:
@@ -231,7 +247,7 @@ func tryShoot():
 			if visual.has_method("onRefillBurstAmmo"):
 				visual.onRefillBurstAmmo()
 		
-		if ammo <= 0:
+		if ammo <= 0: # burst count ran out
 			print("no ammo")
 			if visual.has_method("onDryAmmo"):
 				visual.onDryAmmo()
