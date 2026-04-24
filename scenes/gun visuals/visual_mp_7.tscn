@@ -1,3 +1,19 @@
 [gd_scene format=3 uid="uid://dqr0g1bdhj1ga"]
 
+[ext_resource type="Script" uid="uid://calrawqkegxi8" path="res://scripts/mp7Visual.gd" id="1_it5ur"]
+[ext_resource type="Texture2D" uid="uid://60eacr4ms652" path="res://assets/sprites/guns/mp7.png" id="1_kmajv"]
+[ext_resource type="Texture2D" uid="uid://cecv3a42n7o7h" path="res://assets/sprites/guns/mp7-heat.png" id="2_it5ur"]
+
 [node name="visual_mp7" type="Node2D" unique_id=506852170]
+script = ExtResource("1_it5ur")
+
+[node name="gun" type="Sprite2D" parent="." unique_id=51556385]
+texture = ExtResource("1_kmajv")
+
+[node name="decals" type="Node2D" parent="." unique_id=997274788]
+
+[node name="heat" type="Sprite2D" parent="decals" unique_id=1516380929]
+texture = ExtResource("2_it5ur")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=734031595]
+position = Vector2(9, 0.5)

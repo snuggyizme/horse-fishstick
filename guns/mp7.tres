@@ -1,17 +1,19 @@
 [gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://wv3m4v0vn80n"]
 
 [ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_gq3x3"]
+[ext_resource type="PackedScene" uid="uid://dqr0g1bdhj1ga" path="res://scenes/gun visuals/visual_mp_7.tscn" id="2_p6s40"]
 
 [resource]
 script = ExtResource("1_gq3x3")
-damage = 12.0
-rateOfFire = 0.066
+damage = 3.5
+rateOfFire = 0.1
 rangeLimit = 200
 recoil = 0.6
 spread = 2.0
 knockback = 0.1
 auto = true
 displayName = "MP7"
+visual = ExtResource("2_p6s40")
 ammo = 40
 shootSound = null
 metadata/_custom_type_script = "uid://b0c2pvngg4dqi"
