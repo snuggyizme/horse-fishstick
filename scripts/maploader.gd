@@ -30,6 +30,9 @@ const maps = [
 	{"name": "openair_02", "group": "openair"},
 	
 	{"name": "parliament_01", "group": "parliament"},
+	{"name": "parliament_02", "group": "parliament"},
+	
+	{"name": "atlantis_01", "group": "atlantis"},
 	
 ]
 

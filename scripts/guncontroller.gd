@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/rpg.tres")
+var gun: GunResource = load("res://guns/emptyHand.tres")
 
 var visual: Node2D
 var muzzle

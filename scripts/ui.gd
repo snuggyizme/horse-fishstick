@@ -52,8 +52,10 @@ func _onPlayerTwoHit(dmg, newHp):
 	updateBars()
 
 func updateBars():
-	p1_bar.value = player1.hp
-	p2_bar.value = player2.hp
+	if player1:
+		p1_bar.value = player1.hp
+	if player2:
+		p2_bar.value = player2.hp
 	
 	if player1.hp > 0:
 		livingPlayers[0] = true
