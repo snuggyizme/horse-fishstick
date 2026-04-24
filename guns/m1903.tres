@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://csu0307mgaiml"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_fgtt1"]
+
+[resource]
+script = ExtResource("1_fgtt1")
+damage = 46.0
+rateOfFire = 1.15
+rangeLimit = 99999
+recoil = 2.0
+spread = 0.5
+knockback = 3.0
+auto = true
+doTracersGlow = true
+isHitscan = true
+projectileSpeed = 69420
+displayName = "M1903"
+ammo = 5
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"
