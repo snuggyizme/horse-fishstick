@@ -8,10 +8,10 @@ var maxSpeed = 400
 const acceleration = 140.0
 const friction = 34
 var jumpSpeed = -210.0
-const wallJumpSpeed = -310.0 # fuc kyou
+const wallJumpSpeed = -210.0 # fuc kyou
 const airFriction = 10
 
-var maxWallJumps = 1
+var maxWallJumps = 3
 var wallJumps = maxWallJumps
 
 var skip = false
@@ -27,6 +27,8 @@ const defaults = {
 }
 
 @export var inputPrefix: String # p1- p2-
+
+@onready var coyote = $coyoteTimer
 
 func justSwapped():
 	return Input.is_action_just_pressed(inputPrefix + "swap")
@@ -53,15 +55,21 @@ func _physics_process(delta: float) -> void:
 		skip = false
 		return
 	
+	var wasOnFloor = is_on_floor()
+	move_and_slide()
+	
 	if not is_on_floor():
-		velocity += get_gravity() * delta * 1.1 # I hate gravity fuck you
-	elif Input.is_action_pressed(inputPrefix + "up"):
+		if wasOnFloor and velocity.y >= 0:
+			coyote.start()
+	if Input.is_action_pressed(inputPrefix + "up") and (is_on_floor() or not coyote.is_stopped()):
 		velocity.y = jumpSpeed
-	else:
+		velocity += get_gravity() * delta * 1.1 # I hate gravity fuck you
+	if is_on_floor():
 		wallJumps = maxWallJumps
 		
 	if is_on_wall_only() and wallJumps > 0 and Input.is_action_just_pressed(inputPrefix + "up"):
 		velocity.y = wallJumpSpeed
+		velocity.x *= -1.65 + 30
 		wallJumps -= 1
 		
 	var direction := Input.get_axis(inputPrefix + "left", inputPrefix + "right")
@@ -94,5 +102,6 @@ func _physics_process(delta: float) -> void:
 		yAim = 0
 	
 	move_and_slide()
-	
-	
+
+func onCoyoteTimerTimeout() -> void:
+	pass # Replace with function body.

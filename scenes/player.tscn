@@ -41,3 +41,9 @@ debug_color = Color(0.6537394, 0.5177267, 0.05323176, 0.41960785)
 
 [node name="gunController" type="Node2D" parent="." unique_id=1865751482]
 script = ExtResource("3_qhqgy")
+
+[node name="coyoteTimer" type="Timer" parent="." unique_id=1717706379]
+wait_time = 0.075
+one_shot = true
+
+[connection signal="timeout" from="coyoteTimer" to="." method="onCoyoteTimerTimeout"]

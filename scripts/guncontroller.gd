@@ -56,7 +56,7 @@ func trace(a, b, width=2.0):
 		fadeOut = Color.html(gun.tracerColourFade + "00")
 	else:
 		tracer.default_color = Color8(255, 255, 255, 64)
-		fadeOut = Color8(255, 255, 255, 0)
+		fadeOut = Color8(255, 200, 200, 0)
 	if gun.doTracersGlow:
 		tracer.default_color = tracer.default_color.blend(Color(2, 2, 2))
 	if gun.overrideFade:

@@ -23,4 +23,5 @@ burstRate = 69420.0
 ammo = 128
 bulletsPerShot = 64
 doBullertsPerShotWithBurstAmmo = true
+shootSound = null
 metadata/_custom_type_script = "uid://b0c2pvngg4dqi"
