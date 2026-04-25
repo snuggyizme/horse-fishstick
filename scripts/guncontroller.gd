@@ -147,8 +147,8 @@ func shoot():
 				return
 	
 	if gun.isProjectile: # aaaaa proejctile wepaonry gona comit first olol
-		if gun.doProjectileGravity: # will fall in arc
-			pass
+		pass # finally: this
+			
 	
 	if gun.useShapeCast:
 		var shape = CircleShape2D.new()
