@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://cw3xs0saoeq08"]
 
 [ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_q5ccl"]
-[ext_resource type="PackedScene" uid="uid://cd0pfya2cv3ye" path="res://scripts/visual_vector.tscn" id="2_ulg4t"]
+[ext_resource type="PackedScene" uid="uid://cd0pfya2cv3ye" path="res://scenes/gun visuals/visual_vector.tscn" id="2_ulg4t"]
 
 [resource]
 script = ExtResource("1_q5ccl")

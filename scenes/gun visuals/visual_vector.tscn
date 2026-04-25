@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ca5qyjvj8qgdb" path="res://assets/sprites/guns/vector-heat.png" id="3_pbxfb"]
 
 [node name="visual-vector" type="Node2D" unique_id=1760917802]
-position = Vector2(-5.82, 1.61)
+position = Vector2(-5.485, 2.875)
 script = ExtResource("1_xgs28")
 
 [node name="gun" type="Sprite2D" parent="." unique_id=1000153489]

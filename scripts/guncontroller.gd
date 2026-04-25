@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/vector.tres")
+var gun: GunResource = load("res://guns/hk169.tres")
 
 var visual: Node2D
 var muzzle
@@ -216,7 +216,7 @@ func shoot():
 		#print(hit.name)
 		
 		if hit.has_method("hurt"):
-			print("hit player")
+			#print("hit player")
 			hit.hurt(gun.damage)
 			hit.nudge(-direction, gun.knockback * 50)
 	else:
@@ -362,5 +362,5 @@ func _process(_delta: float) -> void:
 	visual.position = gunPos
 	if get_parent().facingDirection == Vector2.LEFT:
 		visual.scale.x = -1
-		#visual.position = -gunPos
+		visual.position.x = -gunPos.x
 		
