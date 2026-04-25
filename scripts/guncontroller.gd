@@ -143,6 +143,10 @@ func shoot():
 				flash(start, holyFuckTooManyAimingVariables)
 				return
 	
+	if gun.isProjectile: # aaaaa proejctile wepaonry gona comit first olol
+		if gun.doProjectileGravity: # will fall in arc
+			pass
+	
 	if gun.useShapeCast:
 		var shape = CircleShape2D.new()
 		shape.radius = gun.LaserSize / 2.0 # laserSize is circumf
@@ -279,7 +283,7 @@ func tryShoot():
 		print("shot - source: gun ", gun.displayName)
 		shoot()
 		shootSound()
-	else:
+	else: # coming back on this HOW THE FUCK DOES THIS WORK
 		for pellet in range(gun.bulletsPerShot):
 			shoot()
 		print("shot - source: shotgun ", gun.displayName)
