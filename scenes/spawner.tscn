@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bauq0lxsl05kv" path="res://assets/sprites/spawner.png" id="1_2vbf6"]
 [ext_resource type="Script" uid="uid://0slklfi1evwd" path="res://scripts/spawner.gd" id="1_ik2nu"]
+[ext_resource type="FontFile" uid="uid://b6vs2mj480kyp" path="res://assets/fonts/toxigenesis bd.otf" id="3_tx2ig"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ik2nu"]
 atlas = ExtResource("1_2vbf6")
@@ -36,6 +37,14 @@ radius = 21.023796
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ik2nu"]
 points = PackedVector2Array(0, 0, 3, 3, 3, 4, -13, 4, -13, 3, -10, 0)
 
+[sub_resource type="FontVariation" id="FontVariation_tx2ig"]
+base_font = ExtResource("3_tx2ig")
+spacing_glyph = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6bbd6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cmhla"]
+
 [node name="spawner" type="Node2D" unique_id=841179750]
 script = ExtResource("1_ik2nu")
 
@@ -55,6 +64,25 @@ position = Vector2(5, 4)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=111449399]
 shape = SubResource("ConvexPolygonShape2D_ik2nu")
 debug_color = Color(0.3764706, 0.23921569, 0.81960785, 0.8)
+
+[node name="Label" type="Label" parent="." unique_id=1434755856]
+z_index = 9
+texture_filter = 3
+offset_left = -53.0
+offset_top = -15.0
+offset_right = 53.0
+offset_bottom = -2.0
+theme_override_colors/font_color = Color(0.87384486, 0.91018116, 0.8980691, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.26666668)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_tx2ig")
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6bbd6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cmhla")
+text = "no assigned gun"
+horizontal_alignment = 1
 
 [connection signal="body_entered" from="range" to="." method="bodyEntered"]
 [connection signal="body_exited" from="range" to="." method="bodyExited"]

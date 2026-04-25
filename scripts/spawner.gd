@@ -4,7 +4,12 @@ extends Node2D
 
 var playersInRange = []
 
+@onready var label = $Label
+
+var text: String
+
 func _ready() -> void:
+	label.set_text("")
 	updateSprite()
 
 func updateSprite():
@@ -56,6 +61,8 @@ func updateSprite():
 			add_child(gunDisplay)
 			
 		instance.queue_free()
+		
+		text = gun.displayName
 	
 func bodyEntered(body: Node2D) -> void:
 	if body.is_in_group("players") and body not in playersInRange:
@@ -66,6 +73,11 @@ func bodyExited(body: Node2D) -> void:
 		playersInRange.erase(body)
 
 func _process(_delta):
+	if len(playersInRange) > 0:
+		label.text = text
+	else:
+		label.text = ""
+	
 	for player in playersInRange:
 		if player.justSwapped() and is_instance_valid(player):
 			swapGuns(player)

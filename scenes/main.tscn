@@ -33,7 +33,7 @@ position = Vector2(-216, -121.5)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1121889957]
 environment = SubResource("Environment_sugp2")
 
-[node name="i love you man" type="Sprite2D" parent="." unique_id=450233664]
+[node name="silent observer" type="Sprite2D" parent="." unique_id=450233664]
 z_index = 50
 position = Vector2(441.915, -18)
 texture = ExtResource("2_jyhfs")
