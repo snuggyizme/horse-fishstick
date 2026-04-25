@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b41650u8ubwo8"]
+
+[ext_resource type="Script" uid="uid://dvrppre6lvjqd" path="res://scripts/projectile.gd" id="1_5bkip"]
+
+[node name="projectileBase" type="CharacterBody2D" unique_id=83568488]
+script = ExtResource("1_5bkip")

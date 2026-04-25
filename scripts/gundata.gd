@@ -21,6 +21,7 @@ class_name GunResource
 @export_category("Hitscan / Projectile")
 @export var isProjectile: bool ## True = projectile weapon that takes time to move. False = hitscan
 @export var projectileSpeed: int ## Projectile speed in pixels / second. Only if Is Projectile = true.
+@export var projectileDrop: float ## Gravity effect applied to the projectile. Only if Is Projectile = true.
 @export var useShapeCast: bool ## True = fired projectile is a hitscan laser that travels through walls. Using this with Is Projectile will prioritise the projectile and not fire the laser.
 @export var LaserSize: int ## Width of the shapecast in pixels. Only if Use Shapecast = true.
 

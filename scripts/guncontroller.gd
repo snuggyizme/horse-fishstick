@@ -15,6 +15,8 @@ var ammo: int
 
 var holyFuckTooManyAimingVariables
 
+var moveTracer
+
 var sounds = {
 	"shot": [
 		"light", # temp for index
@@ -72,7 +74,8 @@ func trace(a, b, width=2.0):
 	tracer.clear_points()
 	tracer.add_point(a)
 	tracer.add_point(b)
-	get_tree().current_scene.add_child(tracer)	
+	
+	get_tree().current_scene.add_child(tracer)
 	
 	var tracerTween = get_tree().create_tween()
 	tracerTween.tween_property(
@@ -344,4 +347,5 @@ func _process(_delta: float) -> void:
 	visual.position = gunPos
 	if get_parent().facingDirection == Vector2.LEFT:
 		visual.scale.x = -1
-		visual.position = -gunPos
+		#visual.position = -gunPos
+		

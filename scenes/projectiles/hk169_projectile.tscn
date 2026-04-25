@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bib4s5r4vkf2v"]
+
+[ext_resource type="Texture2D" uid="uid://baguyjcfjjjqx" path="res://assets/sprites/projectiles/hk169-projectile.png" id="1_mmu4d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wld2y"]
+size = Vector2(3, 2)
+
+[node name="collisionShape" type="CollisionShape2D" unique_id=776466719]
+shape = SubResource("RectangleShape2D_wld2y")
+debug_color = Color(0.5874656, 0.4095886, 0.9324713, 0.41960785)
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=1493860508]
+texture = ExtResource("1_mmu4d")

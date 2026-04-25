@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://celartwcsmepx"
-path="res://.godot/imported/clip.png-931f0f3c0f63339f5a88af07d80daf7a.ctex"
+uid="uid://th247880fbr6"
+path="res://.godot/imported/bulletcasing.png-4f0f2458b88832f0092d6668fd7f239e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/guns/clip.png"
-dest_files=["res://.godot/imported/clip.png-931f0f3c0f63339f5a88af07d80daf7a.ctex"]
+source_file="res://assets/sprites/bulletcasing.png"
+dest_files=["res://.godot/imported/bulletcasing.png-4f0f2458b88832f0092d6668fd7f239e.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://5os15auik6ey"]
 
-[ext_resource type="Texture2D" uid="uid://th247880fbr6" path="res://assets/sprites/guns/bulletcasing.png" id="1_5rmea"]
+[ext_resource type="Texture2D" uid="uid://th247880fbr6" path="res://assets/sprites/bulletcasing.png" id="1_5rmea"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5rmea"]
 bounce = 0.39

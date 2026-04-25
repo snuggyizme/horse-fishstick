@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://k8rhykbp6lqg"]
 
-[ext_resource type="Texture2D" uid="uid://celartwcsmepx" path="res://assets/sprites/guns/clip.png" id="1_nnl4h"]
+[ext_resource type="Texture2D" uid="uid://celartwcsmepx" path="res://assets/sprites/clip.png" id="1_nnl4h"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nnl4h"]
 bounce = 0.18
