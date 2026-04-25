@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cd0pfya2cv3ye"]
+
+[ext_resource type="Script" uid="uid://cg743i6k14yae" path="res://vectorDecals.gd" id="1_xgs28"]
+[ext_resource type="Texture2D" uid="uid://dfyj07nexaevf" path="res://assets/sprites/guns/vector.png" id="2_pbxfb"]
+[ext_resource type="Texture2D" uid="uid://ca5qyjvj8qgdb" path="res://assets/sprites/guns/vector-heat.png" id="3_pbxfb"]
+
+[node name="visual-vector" type="Node2D" unique_id=1760917802]
+position = Vector2(-5.82, 1.61)
+script = ExtResource("1_xgs28")
+
+[node name="gun" type="Sprite2D" parent="." unique_id=1000153489]
+texture = ExtResource("2_pbxfb")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=1186759705]
+position = Vector2(19, -2.5)
+
+[node name="decals" type="Node2D" parent="." unique_id=1032263391]
+
+[node name="heat" type="Sprite2D" parent="decals" unique_id=768794384]
+texture = ExtResource("3_pbxfb")
+
+[node name="casingSpawner" type="Marker2D" parent="." unique_id=760873654]
+position = Vector2(6.5, -2)

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://cw3xs0saoeq08"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_q5ccl"]
+[ext_resource type="PackedScene" uid="uid://cd0pfya2cv3ye" path="res://scripts/visual_vector.tscn" id="2_ulg4t"]
+
+[resource]
+script = ExtResource("1_q5ccl")
+damage = 8.0
+rateOfFire = 0.45
+rangeLimit = 360
+recoil = 0.75
+spread = 0.75
+knockback = 0.8
+auto = true
+displayName = "KRISS Vector"
+visual = ExtResource("2_ulg4t")
+isBurst = true
+burstSize = 5
+burstRate = 0.1
+ammo = 30
+shootSound = null
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

@@ -11,6 +11,7 @@ size = Vector2(2, 3.3333335)
 [node name="clip" type="Node2D" unique_id=2142409316]
 
 [node name="rigidbody" type="RigidBody2D" parent="." unique_id=236391344]
+z_index = 9
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_nnl4h")
 gravity_scale = 0.9
