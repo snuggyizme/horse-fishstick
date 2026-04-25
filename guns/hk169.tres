@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://plj8y0j6rchy"]
+
+[ext_resource type="PackedScene" uid="uid://bib4s5r4vkf2v" path="res://scenes/projectiles/hk169_projectile.tscn" id="1_4klh8"]
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_otp1t"]
+[ext_resource type="PackedScene" uid="uid://tfs0tkjklivq" path="res://scenes/gun visuals/visual_hk169.tscn" id="3_delm4"]
+
+[resource]
+script = ExtResource("1_otp1t")
+damage = 20.0
+rateOfFire = 0.57
+rangeLimit = 99999
+recoil = 0.65
+spread = 2.0
+knockback = 1.0
+isProjectile = true
+projectileSpeed = 15
+projectileVisual = ExtResource("1_4klh8")
+displayName = "HK169"
+visual = ExtResource("3_delm4")
+ammo = 5
+shootSound = null
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

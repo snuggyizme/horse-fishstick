@@ -2,10 +2,11 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/mp7.tres")
+var gun: GunResource = load("res://guns/hk169.tres")
 
 var visual: Node2D
 var muzzle
+var projectileVisualScene: PackedScene
 
 var facingDirection = "right"
 var gunPos
@@ -34,8 +35,13 @@ var sounds = {
 	get_node("../bodyhurtbox"), get_node("../bodyhurtbox/body"),
 ]
 
+var projectileScene = load("res://scenes/projectile_base.tscn")
+
 func _ready():
 	setGun(gun)
+
+func _onProjectileHit(gunUsed):
+	print("PROJECTILE HIT!")
 
 func setGun(newGun: GunResource):
 	gun = newGun
@@ -51,6 +57,9 @@ func setGun(newGun: GunResource):
 	
 	burstAmmo = gun.burstSize
 	ammo = gun.ammo
+	
+	if gun.projectileVisual:
+		projectileVisualScene = gun.projectileVisual
 
 func trace(a, b, width=2.0):
 	var fadeOut
@@ -147,8 +156,14 @@ func shoot():
 				return
 	
 	if gun.isProjectile: # aaaaa proejctile wepaonry gona comit first olol
-		pass # finally: this
-			
+		var projectile = projectileScene.instantiate()
+		projectile.global_position = muzzle.global_position
+		projectile.velocity = (gun.projectileSpeed * holyFuckTooManyAimingVariables).rotated(spreadRad)
+		projectile.setType(gun)
+		projectile.playerOwner = get_parent()
+		projectile.add_child(projectileVisualScene.instantiate())
+		projectile.onHit.connect(_onProjectileHit)
+		get_tree().current_scene.add_child(projectile)
 	
 	if gun.useShapeCast:
 		var shape = CircleShape2D.new()

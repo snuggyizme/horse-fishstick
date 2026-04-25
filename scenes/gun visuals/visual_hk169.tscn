@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://tfs0tkjklivq"]
+
+[ext_resource type="Texture2D" uid="uid://bus8d6pgcftt0" path="res://assets/sprites/guns/hk169.png" id="1_37qy4"]
+
+[node name="visual-hk169" type="Node2D" unique_id=1599316117]
+
+[node name="gun" type="Sprite2D" parent="." unique_id=1746289547]
+texture = ExtResource("1_37qy4")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=1837401051]
+position = Vector2(16, 0)

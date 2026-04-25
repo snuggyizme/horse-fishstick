@@ -22,6 +22,8 @@ class_name GunResource
 @export var isProjectile: bool ## True = projectile weapon that takes time to move. False = hitscan
 @export var projectileSpeed: int ## Projectile speed in pixels / second. Only if Is Projectile = true.
 @export var projectileDrop: float ## Gravity effect applied to the projectile. Only if Is Projectile = true.
+@export var projectileVisual: PackedScene ## Like the visual for this gun but different. A scene with a root CollisionShape2D called 'collisionShape' and a child Sprite2D called 'sprite'
+@export var projectileBounces: int ## Times the projectile is allowed to bounce before being forced to detonate
 @export var useShapeCast: bool ## True = fired projectile is a hitscan laser that travels through walls. Using this with Is Projectile will prioritise the projectile and not fire the laser.
 @export var LaserSize: int ## Width of the shapecast in pixels. Only if Use Shapecast = true.
 
