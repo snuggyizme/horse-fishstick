@@ -24,12 +24,11 @@ func _physics_process(delta: float) -> void:
 			var collider = get_slide_collision(i).get_collider()
 			print(collider, playerOwner)
 			if collider.has_method("hurt"):
-				if collider == playerOwner:
-					continue
-				collider.hurt(gunResource.damage)
-				onHit.emit(gunResource)
-				# spawn vfx? i dont awnt to draw explosions (~~i do but it would suck~~)
-				queue_free()
+				if collider != playerOwner:
+					collider.hurt(gunResource.damage)
+					onHit.emit(gunResource)
+					# spawn vfx? i dont awnt to draw explosions (~~i do but it would suck~~)
+					queue_free()
 			else:
 				if bounces > 0:
 					velocity = velocity.bounce(collider.get_normal())
