@@ -19,6 +19,7 @@ const maps = [
 	{"name": "chamber_01", "group": "chamber"},
 	{"name": "temple_01", "group": "temple"},
 	{"name": "store_01", "group": "store"},
+	{"name": "openair_01", "group": "openair"},
 	
 ]
 
