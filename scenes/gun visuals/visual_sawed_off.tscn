@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://caynuy86jnvgn"]
+
+[ext_resource type="Texture2D" uid="uid://clnbrx5bkwu1c" path="res://assets/sprites/guns/sawedOff.png" id="1_yaco8"]
+
+[node name="visual_sawed_off" type="Node2D" unique_id=1605438109]
+
+[node name="gun" type="Sprite2D" parent="." unique_id=864730259]
+texture = ExtResource("1_yaco8")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=2129455059]
+position = Vector2(3, 0)

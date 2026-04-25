@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/dp12.tres")
+var gun: GunResource = load("res://guns/sawedOff.tres")
 
 var visual: Node2D
 var muzzle
@@ -129,7 +129,7 @@ func shoot():
 				collider.hurt(gun.damage)
 				collider.nudge(-direction, gun.knockback * 50)
 				
-		#print("point blank")
+		print("point blank")
 		flash(start, holyFuckTooManyAimingVariables)
 		return
 	
@@ -174,6 +174,7 @@ func shoot():
 	#print("dir:", str(direction.rotated(spreadRad)) + "\n" + str(result) + "\n" + str(query))
 	
 	if result:
+		print("hit")
 		trace(start, result["position"])
 		
 		var hit = result["collider"]
@@ -317,7 +318,6 @@ func _process(_delta: float) -> void:
 	
 	if (Input.is_action_just_pressed(get_parent().inputPrefix + "shoot") and gun.auto == false) or (Input.is_action_pressed(get_parent().inputPrefix + "shoot") and gun.auto == true):
 		tryShoot()
-	
 	visual.scale.x = 1
 	visual.position = gunPos
 	if get_parent().facingDirection == Vector2.LEFT:

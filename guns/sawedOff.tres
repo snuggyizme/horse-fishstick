@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://tnfebkqcw50h"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_knyjo"]
+[ext_resource type="PackedScene" uid="uid://caynuy86jnvgn" path="res://scenes/gun visuals/visual_sawed_off.tscn" id="2_1kiuj"]
+
+[resource]
+script = ExtResource("1_knyjo")
+damage = 0.5
+rateOfFire = 60.0
+rangeLimit = 32
+recoil = 10.0
+spread = 67.0
+knockback = 3.0
+auto = true
+displayName = "Sawed Off"
+visual = ExtResource("2_1kiuj")
+ammo = 1
+bulletsPerShot = 56
+doBullertsPerShotWithBurstAmmo = true
+shootSound = 4
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

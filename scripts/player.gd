@@ -7,8 +7,8 @@ var hp := 100.0
 var maxSpeed = 400
 const acceleration = 140.0
 const friction = 34
-var jumpSpeed = -210.0
-const wallJumpSpeed = -210.0 # fuc kyou
+var jumpSpeed = -230.0
+const wallJumpSpeed = -260.0 # fuc kyou
 const airFriction = 10
 
 var maxWallJumps = 3
@@ -59,13 +59,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if not is_on_floor():
-		if wasOnFloor and velocity.y >= 0:
+		if wasOnFloor:
 			coyote.start()
 	if Input.is_action_pressed(inputPrefix + "up") and (is_on_floor() or not coyote.is_stopped()):
 		velocity.y = jumpSpeed
-		velocity += get_gravity() * delta * 1.1 # I hate gravity fuck you
 	if is_on_floor():
 		wallJumps = maxWallJumps
+		
+	velocity += get_gravity() * delta * 1.1 # I hate gravity fuck you
 		
 	if is_on_wall_only() and wallJumps > 0 and Input.is_action_just_pressed(inputPrefix + "up"):
 		velocity.y = wallJumpSpeed
@@ -100,8 +101,6 @@ func _physics_process(delta: float) -> void:
 		yAim = 1
 	else:
 		yAim = 0
-	
-	move_and_slide()
 
 func onCoyoteTimerTimeout() -> void:
 	pass # Replace with function body.
