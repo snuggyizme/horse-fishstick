@@ -41,7 +41,7 @@ func _ready():
 	setGun(gun)
 
 func _onProjectileHit(gunUsed):
-	print("PROJECTILE HIT!")
+	pass
 
 func setGun(newGun: GunResource):
 	gun = newGun
