@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
 signal damaged(damage, hp)
-signal death(murderer, weapon)
+signal death(murderer, victim, weapon)
 
 var hp := 100.0
 
 var maxSpeed = 400
 const acceleration = 140.0
 const friction = 34
-var jumpSpeed = -230.0
+var jumpSpeed = -210.0
 const wallJumpSpeed = -210.0 # fuc kyou
 const airFriction = 10
 
@@ -56,7 +56,7 @@ func hurt(opponentGun: GunResource):
 		if self.name == "player1":
 			otherPlayer = "player2"
 		
-		emit_signal("death", otherPlayer, opponentGun.displayName)
+		emit_signal("death", otherPlayer, self.name, opponentGun.displayName)
 		queue_free()
 	
 	emit_signal("damaged", opponentGun.damage, hp)
@@ -87,12 +87,12 @@ func _physics_process(delta: float) -> void:
 
 		wallJumps -= 1
 		
-		var wallSpeedX = 160
+		var wallSpeedX = 130
 		if Input.get_axis(inputPrefix + "left", inputPrefix + "right") == -wallNormal:
 			velocity.y = wallJumpSpeed * 1.3
 		else:
 			velocity.y = wallJumpSpeed
-			wallSpeedX = 390
+			wallSpeedX = 360
 		
 		velocity.x = wallNormal * wallSpeedX
 		
