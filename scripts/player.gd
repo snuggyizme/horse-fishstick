@@ -5,14 +5,14 @@ signal death(murderer, victim, weapon)
 
 var hp := 100.0
 
-var maxSpeed = 400
-const acceleration = 140.0
-const friction = 34
-var jumpSpeed = -210.0
-const wallJumpSpeed = -210.0 # fuc kyou
-const airFriction = 10
+var maxSpeed = 105
+const acceleration = 290.0
+const friction = 8
+var jumpSpeed = -230.0
+# fuc kyou
+const airFriction = 2
 var maxWallJumps = 3
-var gravity = 3
+var gravity = 0.85
 
 var facingDirection: Vector2
 var yAim: int # 1 up 0 none -1 down
@@ -21,6 +21,7 @@ var aimingX: bool
 var wallLock = 0.0
 var wasOnFloor = false
 var wallJumps = maxWallJumps
+var wallJumped
 
 @export var inputPrefix: String # p1- p2-
 
@@ -40,7 +41,7 @@ func hurt(opponentGun: GunResource):
 	hp -= opponentGun.damage
 	
 	if hp <= 0.0:
-		print("man im dead " + inputPrefix)
+		#print("man im dead " + inputPrefix)
 		
 		var otherPlayer = "player1"
 		if self.name == "player1":
@@ -52,6 +53,14 @@ func hurt(opponentGun: GunResource):
 	emit_signal("damaged", opponentGun.damage, hp)
 
 func _physics_process(delta: float) -> void:
+	# Get current ( last ) on-floor state and move
+	wasOnFloor = is_on_floor()
+	move_and_slide()
+	
+	#if velocity: print(velocity)
+	
+	print(wallLock)
+	
 	var onFloor = is_on_floor()
 	var onWall = is_on_wall_only()
 	
@@ -61,8 +70,10 @@ func _physics_process(delta: float) -> void:
 			coyote.start()
 	
 	# Jump from ground
-	if Input.is_action_pressed(inputPrefix + "up") and (onFloor or coyote.is_stopped()):
-		velocity.y += jumpSpeed
+	if Input.is_action_pressed(inputPrefix + "up") and onFloor:
+		velocity.y = jumpSpeed
+	if Input.is_action_just_pressed(inputPrefix + "up") and not coyote.is_stopped():
+		velocity.y = jumpSpeed
 	
 	# Reset walljump limit
 	if onFloor:
@@ -72,66 +83,47 @@ func _physics_process(delta: float) -> void:
 	velocity += get_gravity() * delta * gravity
 	
 	# Walljumps ( hell ) ( urath )
-	# Get current ( last ) on-floor state and move
-	wasOnFloor = is_on_floor()
-	move_and_slide()
-	
-	# Old shitty script for reference / restore
-	if false: print("""
-func _physics_process(delta: float) -> void:
-	if skip:
-		skip = false
-		return
-	
-	var wasOnFloor = is_on_floor()
-	move_and_slide()
-	
-	if not is_on_floor():
-		if wasOnFloor:
-			coyote.start()
-	if Input.is_action_pressed(inputPrefix + "up") and (is_on_floor() or not coyote.is_stopped()):
-		velocity.y = jumpSpeed
-	if is_on_floor():
-		wallJumps = maxWallJumps
+	if onWall and wallJumps and Input.is_action_just_pressed(inputPrefix + "up"):
+		var wjNormal = get_wall_normal().x
+		var doWallBounce = Input.get_axis(inputPrefix + "left", inputPrefix + "right")
 		
-	velocity += get_gravity() * delta * 1.1 # I hate gravity fuck you
+		# Customizable settings for walljumps:
+		var wSpeedX = 150
+		var wSpeedXBounce = 180
+		var wSpeedY = -300
+		var wSpeedYBounce = -50
+		# ------------------------------------
 		
-	if is_on_wall_only() and wallJumps > 0 and Input.is_action_just_pressed(inputPrefix + "up"):
-		var wallNormal =  get_wall_normal().x
-
+		if doWallBounce:
+			wSpeedX = wSpeedXBounce
+			wSpeedY = wSpeedYBounce
+		
+		velocity.x += wSpeedX * wjNormal
+		velocity.y += wSpeedY
+		
 		wallJumps -= 1
-		
-		var wallSpeedX = 130
-		if Input.get_axis(inputPrefix + "left", inputPrefix + "right") == -wallNormal:
-			velocity.y = wallJumpSpeed * 1.3
-		else:
-			velocity.y = wallJumpSpeed
-			wallSpeedX = 360
-		
-		velocity.x = wallNormal * wallSpeedX
-		
-		#print(Input.get_axis(inputPrefix + "left", inputPrefix + "right"))
-		#print("AAAAA NORMAL", wallNormal)
-		wallLock = 0.06
-		if Input.get_axis(inputPrefix + "left", inputPrefix + "right"):
-			wallLock = 0.12
-		
+		wallLock = 0.12
+		wallJumped = true
+	
+	# X Movement
 	var direction := Input.get_axis(inputPrefix + "left", inputPrefix + "right")
 	
-	if wallLock <= 0:
-		if direction:
-			var speedRatio = abs(velocity.x) / maxSpeed
-			var r = 1 - speedRatio
-			
-			velocity.x = direction * acceleration * r
-			
-			#velocity.x = clampf(velocity.x, -maxSpeed, maxSpeed)
+	if direction and not wallJumped and wallLock <= 0:
+		var targetSpeed = direction * maxSpeed
+		velocity.x = move_toward(velocity.x, targetSpeed, acceleration * delta)
+	else:
+		if onFloor:
+			velocity.x = move_toward(velocity.x, 0, friction)
 		else:
-			if is_on_floor():
-				velocity.x = move_toward(velocity.x, 0, friction)
-			else:
-				velocity.x = move_toward(velocity.x, 0, airFriction)
+			velocity.x = move_toward(velocity.x, 0, airFriction)
 	
+	# Allow another walljump
+	if wallJumped:
+		wallJumped = false
+	if wallLock > 0:
+		wallLock -= delta
+	
+	# Aiming
 	if Input.is_action_pressed(inputPrefix + "left"):
 		facingDirection = Vector2.LEFT
 		aimingX = true
@@ -148,8 +140,3 @@ func _physics_process(delta: float) -> void:
 	else:
 		yAim = 0
 	
-	wallLock -= delta
-	
-func onCoyoteTimerTimeout() -> void:
-	pass # Replace with function body.
-""") # hehe comment but its print
