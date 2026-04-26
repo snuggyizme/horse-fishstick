@@ -11,29 +11,20 @@ const friction = 34
 var jumpSpeed = -210.0
 const wallJumpSpeed = -210.0 # fuc kyou
 const airFriction = 10
-
 var maxWallJumps = 3
-var wallJumps = maxWallJumps
-
-var skip = false
+var gravity = 3
 
 var facingDirection: Vector2
 var yAim: int # 1 up 0 none -1 down
 var aimingX: bool
 
 var wallLock = 0.0
-
-var uiScene
-
-const defaults = {
-	"maxSpeed": 400,
-	"jumpSpeed": -210.0,
-	"maxWallJumps": 1,
-}
+var wasOnFloor = false
+var wallJumps = maxWallJumps
 
 @export var inputPrefix: String # p1- p2-
 
-@onready var coyote = $coyoteTimer
+@onready var coyote: Timer = $coyoteTimer
 
 func justSwapped():
 	return Input.is_action_just_pressed(inputPrefix + "swap")
@@ -41,7 +32,6 @@ func justSwapped():
 func teleportAndStop(pos: Vector2):
 	global_position = pos
 	velocity = Vector2.ZERO
-	skip = true
 
 func nudge(direction: Vector2, speed):
 	velocity += -direction * speed
@@ -61,9 +51,33 @@ func hurt(opponentGun: GunResource):
 	
 	emit_signal("damaged", opponentGun.damage, hp)
 
-func _ready():
-	uiScene = get_node("../ui")
-
+func _physics_process(delta: float) -> void:
+	var onFloor = is_on_floor()
+	var onWall = is_on_wall_only()
+	
+	# Start coyote jump timer
+	if not onFloor:
+		if wasOnFloor:
+			coyote.start()
+	
+	# Jump from ground
+	if Input.is_action_pressed(inputPrefix + "up") and (onFloor or coyote.is_stopped()):
+		velocity.y += jumpSpeed
+	
+	# Reset walljump limit
+	if onFloor:
+		wallJumps = maxWallJumps
+	
+	# Apply gravity
+	velocity += get_gravity() * delta * gravity
+	
+	# Walljumps ( hell ) ( urath )
+	# Get current ( last ) on-floor state and move
+	wasOnFloor = is_on_floor()
+	move_and_slide()
+	
+	# Old shitty script for reference / restore
+	if false: print("""
 func _physics_process(delta: float) -> void:
 	if skip:
 		skip = false
@@ -138,3 +152,4 @@ func _physics_process(delta: float) -> void:
 	
 func onCoyoteTimerTimeout() -> void:
 	pass # Replace with function body.
+""") # hehe comment but its print
