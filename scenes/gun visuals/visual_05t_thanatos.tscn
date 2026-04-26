@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://hj0256rq78x7"]
 
-[ext_resource type="Texture2D" uid="uid://dl28o5vt3588s" path="res://assets/sprites/guns/thanatos.png" id="1_4jsk5"]
 [ext_resource type="Script" uid="uid://jh4c31mnqseq" path="res://scripts/thanatosDecals.gd" id="1_dwfcu"]
 [ext_resource type="Texture2D" uid="uid://ddc8bo85guqtp" path="res://assets/sprites/guns/thanatos-decal.png" id="2_dwfcu"]
+[ext_resource type="Texture2D" uid="uid://clkacejmk0kgi" path="res://assets/sprites/guns/thanatos.png" id="2_hybpj"]
 
 [node name="visual-05t-thanatos" type="Node2D" unique_id=1659875442]
 position = Vector2(0.885, -0.975)
 script = ExtResource("1_dwfcu")
 
 [node name="gun" type="Sprite2D" parent="." unique_id=85057371]
-texture = ExtResource("1_4jsk5")
+texture = ExtResource("2_hybpj")
 
 [node name="decals" type="Node2D" parent="." unique_id=38313140]
 

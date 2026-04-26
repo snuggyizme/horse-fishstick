@@ -43,3 +43,5 @@ func _onPlayerTwoHit(dmg, newHp):
 func updateBars():
 	p1_bar.value = p1.hp
 	p2_bar.value = p2.hp
+	
+# KILL FEED yeah ill do next commit

@@ -148,7 +148,7 @@ func shoot():
 				continue
 			
 			if collider.has_method("hurt"):
-				collider.hurt(gun.damage)
+				collider.hurt(gun)
 				collider.nudge(-direction, gun.knockback * 50)
 				
 				print("point blank")
@@ -186,7 +186,7 @@ func shoot():
 			for result in results:
 				var collider = result.collider
 				if collider.has_method("hurt"):
-					collider.hurt(gun.damage)
+					collider.hurt(gun)
 					collider.nudge(-direction, gun.knockback * 50)
 		
 		trace(start, end, gun.LaserSize)
@@ -217,7 +217,7 @@ func shoot():
 		
 		if hit.has_method("hurt"):
 			#print("hit player")
-			hit.hurt(gun.damage)
+			hit.hurt(gun)
 			hit.nudge(-direction, gun.knockback * 50)
 	else:
 		trace(start, end)
