@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://vvmrpu6keho0"]
+
+[ext_resource type="Texture2D" uid="uid://b0jmdagkv0ftm" path="res://assets/sprites/guns/emptyHand.png" id="1_lb05n"]
+
+[node name="visual-null" type="Node2D" unique_id=570868066]
+
+[node name="gun" type="Sprite2D" parent="." unique_id=1262912357]
+texture = ExtResource("1_lb05n")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=1995547587]

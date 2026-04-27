@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/hk169.tres")
+var gun: GunResource = load("res://guns/emptyHand.tres")
 
 var visual: Node2D
 var muzzle
@@ -38,7 +38,8 @@ var sounds = {
 var projectileScene = load("res://scenes/projectile_base.tscn")
 
 func _ready():
-	setGun(gun)
+	if gun:
+		setGun(gun)
 
 func _onProjectileHit(gunUsed):
 	pass
@@ -127,7 +128,10 @@ func shoot():
 		direction = holyFuckTooManyAimingVariables
 	var end = start + direction.rotated(spreadRad) * gun.rangeLimit
 	
-	get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 20)
+	if holyFuckTooManyAimingVariables == Vector2.DOWN:
+		get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 35)
+	else:
+		get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 20)
 	#get_parent().nudge(Vector2.LEFT, 350)
 	
 	var spaceState = get_world_2d().direct_space_state
@@ -151,9 +155,10 @@ func shoot():
 				collider.hurt(gun)
 				collider.nudge(-direction, gun.knockback * 5)
 				
-				print("point blank")
+				#print("point blank")
 				flash(start, holyFuckTooManyAimingVariables)
 				return
+			#print("hit close")
 	
 	if gun.isProjectile: # aaaaa proejctile wepaonry gona comit first olol
 		var projectile = projectileScene.instantiate()

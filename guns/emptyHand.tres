@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://b1b2oei6se6sl"]
+
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_yyhrg"]
+[ext_resource type="PackedScene" uid="uid://vvmrpu6keho0" path="res://scenes/gun visuals/visual_null.tscn" id="2_6jh85"]
+
+[resource]
+script = ExtResource("1_yyhrg")
+displayName = "heart attack"
+visual = ExtResource("2_6jh85")
+shootSound = null
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

@@ -13,6 +13,8 @@ const jumpSpeed = -250.0
 const airFriction = 2
 const maxWallJumps = 3
 const gravity = 0.85
+const dashSpeed = 1.8
+const airBoost = 2.5 # boost to accel when airborne. air control
 
 var facingDirection: Vector2
 var yAim: int # 1 up 0 none -1 down
@@ -55,7 +57,7 @@ const dashInput = {
 
 func justSwapped():
 	return Input.is_action_just_pressed(inputPrefix + "swap")
-
+	
 func teleportAndStop(pos: Vector2):
 	global_position = pos
 	velocity = Vector2.ZERO
@@ -89,7 +91,7 @@ func _input(event):
 				keyCombo.pop_front()
 			
 			lastKeyDelta = 0
-			print(keyCombo)
+			#print(keyCombo)
 
 func heavyFriction(d):
 	var frictionHeavy = 34
@@ -190,18 +192,21 @@ func _physics_process(delta: float) -> void:
 	if direction and not wallJumped and wallLock <= 0:
 		var targetSpeed
 		if keyCombo == dashInput[inputPrefix]["left"] and not alreadyDashing:
-			targetSpeed = maxSpeed * -2.5
+			targetSpeed = maxSpeed * -dashSpeed
 			velocity.x = move_toward(velocity.x, targetSpeed, acceleration)
 			alreadyDashing = true
 			doHeavyFriction = 0.2
 		elif keyCombo == dashInput[inputPrefix]["right"] and not alreadyDashing:
-			targetSpeed = maxSpeed * 2.5
+			targetSpeed = maxSpeed * dashSpeed
 			velocity.x = move_toward(velocity.x, targetSpeed, acceleration)
 			doHeavyFriction = 0.2
 			alreadyDashing = true
 		else:
 			targetSpeed = direction * maxSpeed
-			velocity.x = move_toward(velocity.x, targetSpeed, acceleration * delta)
+			if not onFloor:
+				velocity.x = move_toward(velocity.x, targetSpeed, acceleration * airBoost * delta)
+			else:
+				velocity.x = move_toward(velocity.x, targetSpeed, acceleration * delta)
 	else:
 		if onFloor:
 			velocity.x = move_toward(velocity.x, 0, friction)
