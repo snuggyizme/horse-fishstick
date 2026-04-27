@@ -22,6 +22,8 @@ spacing_glyph = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wm3ai"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yev5y"]
+
 [node name="ui" type="Node2D" unique_id=1658613418]
 script = ExtResource("1_x4jx1")
 
@@ -57,11 +59,12 @@ show_percentage = false
 
 [node name="feed" type="RichTextLabel" parent="." unique_id=112948982]
 z_index = 10
-offset_left = -75.0
-offset_top = 67.0
+offset_left = -191.0
+offset_top = -25.0
 offset_right = 209.0
 offset_bottom = 107.0
-theme_override_colors/default_color = Color(1, 0.27999997, 0.27999997, 0.69803923)
+theme_override_colors/default_color = Color(1, 0.27999997, 0.27999997, 1)
+theme_override_colors/selection_color = Color(0.100000024, 0.100000024, 1, 0)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/normal_font = SubResource("FontVariation_gdt2y")
@@ -71,5 +74,7 @@ theme_override_font_sizes/bold_italics_font_size = 11
 theme_override_font_sizes/italics_font_size = 11
 theme_override_font_sizes/mono_font_size = 11
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wm3ai")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yev5y")
+bbcode_enabled = true
 horizontal_alignment = 2
 vertical_alignment = 2

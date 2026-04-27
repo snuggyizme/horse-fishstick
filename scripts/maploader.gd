@@ -17,6 +17,7 @@ const maps = [
 	{"name": "palace_01", "group": "palace"},
 	{"name": "palace_02", "group": "palace"},
 	{"name": "chamber_01", "group": "chamber"},
+	{"name": "chamber_02", "group": "chamber"},
 	{"name": "temple_01", "group": "temple"},
 	{"name": "store_01", "group": "store"},
 	{"name": "openair_01", "group": "openair"},
@@ -25,8 +26,9 @@ const maps = [
 
 var lastMaps = []
 
-func loadMap(mapname: String):	
+func loadMap(mapname: String):
 	var gameworld = get_tree().current_scene.get_node("gameworld")
+	
 	
 	for innocentChild in gameworld.get_children():
 		innocentChild.queue_free()

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bhv6rm0m6u654"]
+
+[ext_resource type="Texture2D" uid="uid://2fvmlme1mt8g" path="res://assets/sprites/bouncepad.png" id="1_msp03"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_msp03"]
+friction = 0.45
+bounce = 2.3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_essok"]
+size = Vector2(2, 2)
+
+[node name="bouncepad" type="StaticBody2D" unique_id=551236790 groups=["bouncey"]]
+physics_material_override = SubResource("PhysicsMaterial_msp03")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=2117188999]
+texture = ExtResource("1_msp03")
+
+[node name="shape" type="CollisionShape2D" parent="." unique_id=612662695]
+shape = SubResource("RectangleShape2D_essok")
+debug_color = Color(0, 0.5950001, 0.7, 0.047058824)

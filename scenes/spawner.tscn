@@ -81,7 +81,7 @@ theme_override_fonts/font = SubResource("FontVariation_tx2ig")
 theme_override_font_sizes/font_size = 7
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6bbd6")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cmhla")
-text = "hai :333"
+text = ":D"
 horizontal_alignment = 1
 
 [connection signal="body_entered" from="range" to="." method="bodyEntered"]

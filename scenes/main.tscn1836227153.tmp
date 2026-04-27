@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cs7fi2cmlvdh4"]
+
+[ext_resource type="Texture2D" uid="uid://vcvb635hpykg" path="res://assets/sprites/testguy.png" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://csbie4ikeq7yt" path="res://scripts/testbittpn.gd" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cjw7c2x0drr77" path="res://scenes/ui.tscn" id="4_jyhfs"]
+
+[sub_resource type="Environment" id="Environment_sugp2"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 0.13
+glow_hdr_threshold = 1.5
+
+[node name="main" type="Node2D" unique_id=1915239700]
+
+[node name="Button" type="Button" parent="." unique_id=923695349]
+z_index = 5
+offset_left = 29.0
+offset_top = -38.0
+offset_right = 109.0
+offset_bottom = -7.0
+text = "new map"
+script = ExtResource("3_sugp2")
+
+[node name="camre" type="Camera2D" parent="." unique_id=2059359122]
+
+[node name="gameworld" type="Node2D" parent="." unique_id=1380691178]
+position = Vector2(-216, -121.5)
+
+[node name="ui" parent="." unique_id=1658613418 instance=ExtResource("4_jyhfs")]
+
+[node name="players" type="Node2D" parent="." unique_id=1719597060]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1121889957]
+environment = SubResource("Environment_sugp2")
+
+[node name="silent observer" type="Sprite2D" parent="." unique_id=450233664]
+z_index = 50
+position = Vector2(441.915, -18)
+texture = ExtResource("2_jyhfs")
+
+[connection signal="pressed" from="Button" to="Button" method="press"]

@@ -127,7 +127,7 @@ func shoot():
 		direction = holyFuckTooManyAimingVariables
 	var end = start + direction.rotated(spreadRad) * gun.rangeLimit
 	
-	get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 100)
+	get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 20)
 	#get_parent().nudge(Vector2.LEFT, 350)
 	
 	var spaceState = get_world_2d().direct_space_state
@@ -149,7 +149,7 @@ func shoot():
 			
 			if collider.has_method("hurt"):
 				collider.hurt(gun)
-				collider.nudge(-direction, gun.knockback * 50)
+				collider.nudge(-direction, gun.knockback * 5)
 				
 				print("point blank")
 				flash(start, holyFuckTooManyAimingVariables)
@@ -187,7 +187,7 @@ func shoot():
 				var collider = result.collider
 				if collider.has_method("hurt"):
 					collider.hurt(gun)
-					collider.nudge(-direction, gun.knockback * 50)
+					collider.nudge(-direction, gun.knockback * 5)
 		
 		trace(start, end, gun.LaserSize)
 		return
@@ -218,7 +218,7 @@ func shoot():
 		if hit.has_method("hurt"):
 			#print("hit player")
 			hit.hurt(gun)
-			hit.nudge(-direction, gun.knockback * 50)
+			hit.nudge(-direction, gun.knockback * 5)
 	else:
 		trace(start, end)
 
