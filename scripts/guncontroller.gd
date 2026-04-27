@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/emptyHand.tres")
+var gun: GunResource = load("res://guns/hk169.tres")
 
 var visual: Node2D
 var muzzle
@@ -41,8 +41,13 @@ func _ready():
 	if gun:
 		setGun(gun)
 
-func _onProjectileHit(gunUsed):
-	pass
+func _onProjectileHit(gunUsed: GunResource, normal: Vector2, positron: Vector2):
+	match gunUsed.displayName:
+		"HK169":
+			var explosion = load("res://scenes/explosion visuals/visual_explosion_medium.tscn").instantiate()
+			explosion.explode(normal)
+			explosion.global_position = positron
+			get_tree().current_scene.add_child(explosion)
 
 func setGun(newGun: GunResource):
 	gun = newGun
@@ -129,9 +134,9 @@ func shoot():
 	var end = start + direction.rotated(spreadRad) * gun.rangeLimit
 	
 	if holyFuckTooManyAimingVariables == Vector2.DOWN:
-		get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 35)
+		get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 22)
 	else:
-		get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 20)
+		get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 5)
 	#get_parent().nudge(Vector2.LEFT, 350)
 	
 	var spaceState = get_world_2d().direct_space_state

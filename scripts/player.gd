@@ -102,7 +102,7 @@ func heavyFriction(d):
 	else:
 		velocity.x = move_toward(velocity.x, 0, d * airFrictionHeavy)
 	
-	print("Heavy bubbles")
+	#print("Heavy bubbles")
 
 func _physics_process(delta: float) -> void:
 	lastKeyDelta += delta

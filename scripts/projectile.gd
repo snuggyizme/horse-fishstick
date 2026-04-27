@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal onHit(gunUsed)
+signal onHit(gunUsed, normal, pos)
 
 var gravity := 0.0
 var bounces := 0
@@ -25,13 +25,13 @@ func _physics_process(delta: float) -> void:
 		if collider.has_method("hurt"):
 			if collider != playerOwner:
 				collider.hurt(gunResource)
-				onHit.emit(gunResource)
-				# spawn vfx? i dont awnt to draw explosions (~~i do but it would suck~~)
+				onHit.emit(gunResource, collision.get_normal(), global_position)
+				# spawn vfx? i dont awnt to draw explosions (~~i do but it would suck~~) hehe ye i did it
 				queue_free()
 		else:
 			if bounces > 0:
 				velocity = velocity.bounce(collision.get_normal())
 				bounces -= 1
 			else:
-				onHit.emit(gunResource)
+				onHit.emit(gunResource, collision.get_normal(), global_position)
 				queue_free()
