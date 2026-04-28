@@ -18,7 +18,7 @@ class_name GunResource
 @export var fadeTime: float ## Seconds until the tracers fade and disappear
 @export var overrideFade: bool ## True = Use the above value instead of the default
 @export var doLayeredTracers: bool ## Stacks of colours
-@export var layeredHueShift: int ## Change in hue between stacks of tracers
+@export var layeredHueShift: float ## Change in hue between stacks of tracers. measured in revolutions
 @export var tracerLayersCount: int ## Amount of stacks of colours
 
 @export_category("Hitscan / Projectile")
