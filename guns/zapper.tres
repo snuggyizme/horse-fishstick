@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_al7oo")
-damage = 14.5
-rateOfFire = 0.45
+damage = 18.5
+rateOfFire = 0.65
 rangeLimit = 99999
 recoil = 1.6
 knockback = 5.0
@@ -15,9 +15,8 @@ tracerColour = "0000ff"
 tracerColourFade = "8eff00"
 overrideTracers = true
 doTracersGlow = true
-fadeTime = 0.1
+fadeTime = 0.9
 overrideFade = true
-isHitscan = true
 projectileSpeed = 69
 useShapeCast = true
 LaserSize = 5
@@ -26,4 +25,5 @@ visual = ExtResource("2_4tk3w")
 burstSize = 69
 burstRate = 69.0
 ammo = 12
+shootSound = null
 metadata/_custom_type_script = "uid://b0c2pvngg4dqi"
