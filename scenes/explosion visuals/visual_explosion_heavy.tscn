@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://hh7ry0e7wuen"]
+
+[ext_resource type="Script" uid="uid://dbhr5vll6omae" path="res://scripts/heavyexplosionVisuals.gd" id="1_buv0s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b8p6t"]
+
+[node name="visual-explosion-heavy" type="Node2D" unique_id=1980238587]
+script = ExtResource("1_buv0s")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="." unique_id=1388403115]
+scale = Vector2(1.88, 1.88)
+shape = SubResource("CircleShape2D_b8p6t")
+target_position = Vector2(0, 0)

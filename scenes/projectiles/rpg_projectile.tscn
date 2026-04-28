@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://by0tofuyjdo61"]
+
+[ext_resource type="Texture2D" uid="uid://cdurobbcoa0n8" path="res://assets/sprites/projectiles/rpg-projectile.png" id="1_ei04q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hy4ab"]
+size = Vector2(20, 5)
+
+[node name="rpg-projectile" type="CollisionShape2D" unique_id=1208954676]
+shape = SubResource("RectangleShape2D_hy4ab")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=307243175]
+texture = ExtResource("1_ei04q")

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dptfyb0cpt54j"]
+
+[ext_resource type="Texture2D" uid="uid://bmpnnem24win4" path="res://assets/sprites/guns/rpg.png" id="1_mpql2"]
+
+[node name="visual-rpg" type="Node2D" unique_id=392655710]
+
+[node name="gun" type="Sprite2D" parent="." unique_id=61091867]
+texture = ExtResource("1_mpql2")
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=1153621537]
+position = Vector2(17, 0)

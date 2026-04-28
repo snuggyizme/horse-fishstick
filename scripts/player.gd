@@ -71,10 +71,8 @@ func teleportAndStop(pos: Vector2):
 
 func nudge(direction: Vector2, speed):
 	velocity += -direction * speed
-	
-func hurt(opponentGun: GunResource):
-	hp -= opponentGun.damage
-	
+
+func checkDeath(opponentGun):
 	if hp <= 0.0:
 		#print("man im dead " + inputPrefix)
 		
@@ -86,6 +84,16 @@ func hurt(opponentGun: GunResource):
 		queue_free()
 	
 	emit_signal("damaged", opponentGun.damage, hp)
+
+func hurtDamage(dmg: float, gun):
+	hp -= dmg
+	
+	checkDeath(gun)
+
+func hurt(opponentGun: GunResource):
+	hp -= opponentGun.damage
+	
+	checkDeath(opponentGun)
 
 func _input(event):
 	if event is InputEventKey and !event.is_echo() and event.pressed:

@@ -2,7 +2,7 @@ extends Node2D
 
 var fireTime := 0.0
 var burstFireTime := 0.0
-var gun: GunResource = load("res://guns/hk169.tres")
+var gun: GunResource = load("res://guns/rpg.tres")
 
 var visual: Node2D
 var muzzle
@@ -47,18 +47,29 @@ func _onProjectileHit(gunUsed: GunResource, normal: Vector2, positron: Vector2):
 	match gunUsed.displayName:
 		"HK169":
 			explosion = load("res://scenes/explosion visuals/visual_explosion_medium.tscn").instantiate()
+		"RPG": # temp, it will have a larger explosion
+			explosion = load("res://scenes/explosion visuals/visual_explosion_heavy.tscn").instantiate()
 	explosion.explode(normal)
 	explosion.global_position = positron
 	get_tree().current_scene.add_child(explosion)
 	
+	var shape = explosion.get_node("ShapeCast2D")
+	
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.shape = shape.shape
+	query.transform = shape.global_transform
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	query.collision_mask = 1
+	
 	var spaceState = get_world_2d().direct_space_state
-	var results = spaceState.intersect_shape(explosion.get_node("ShapeCast2D"))
+	var results = spaceState.intersect_shape(query)
 
 	if results.size() > 0:
 		for result in results:
 			var collider = result.collider
 			if collider.has_method("hurt"):
-				collider.hurt(40)
+				collider.hurtDamage(40, gun)
 				collider.nudge(normal, gun.knockback * 50)
 				
 				print("explosion hit and pushed")
@@ -114,44 +125,7 @@ func trace(a, b, width=2.0):
 		fadeTime
 	)
 	tracerTween.finished.connect(func(): tracer.queue_free())
-		
-	if gun.doLayeredTracers and gun.tracerLayersCount:
-		assert(gun.overrideTracers, "Gun " + gun.displayName + " needs to override tracer colours to do layered tracers")
-		
-		var fadeOutLayer
-		for layer in range(gun.tracerLayersCount):
-			var tracerLayer = Line2D.new()
-			tracerLayer.antialiased = true
-			tracerLayer.z_index = 2
-			
-			tracerLayer.default_color = Color(gun.tracerColour)
-			fadeOutLayer = Color.html(gun.tracerColourFade + "00")
-			#print("wah!", fadeOutLayer.h)
-			fadeOutLayer.h += gun.layeredHueShift * (layer + 1)
-			#print("beeb!", fadeOutLayer.h)
-			
-			if gun.doTracersGlow:
-				tracerLayer.default_color = tracerLayer.default_color.blend(Color(2, 2, 2))
-			if gun.overrideFade:
-				fadeTime = gun.fadeTime
-			
-			tracerLayer.width = width / (1.5 * layer + 1)
-			tracerLayer.clear_points()
-			tracerLayer.add_point(a)
-			tracerLayer.add_point(b)
-			
-			get_tree().current_scene.add_child(tracerLayer)
-			
-			var tracerLayerTween = get_tree().create_tween()
-			tracerLayerTween.tween_property(
-				tracerLayer,
-				"default_color",
-				fadeOutLayer,
-				fadeTime + (layer * 0.2)
-			)
-			tracerTween.finished.connect(func(): tracerLayer.queue_free())
-		print(fadeOut.h, " vs ", fadeOutLayer.h)
-
+	
 func kapingIt():
 	var kapinger = AudioStreamPlayer2D.new()
 	kapinger.stream = sounds["kaping"]

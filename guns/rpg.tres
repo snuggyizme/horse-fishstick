@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GunResource" format=3 uid="uid://core23cbgtx0f"]
+
+[ext_resource type="PackedScene" uid="uid://by0tofuyjdo61" path="res://scenes/projectiles/rpg_projectile.tscn" id="1_4avy2"]
+[ext_resource type="Script" uid="uid://b0c2pvngg4dqi" path="res://scripts/gundata.gd" id="1_80taw"]
+[ext_resource type="PackedScene" uid="uid://dptfyb0cpt54j" path="res://scenes/gun visuals/visual_rpg.tscn" id="3_thbey"]
+
+[resource]
+script = ExtResource("1_80taw")
+damage = 70.0
+rateOfFire = 1.25
+rangeLimit = 99999999
+recoil = 4.0
+knockback = 6.0
+isProjectile = true
+projectileSpeed = 600
+projectileVisual = ExtResource("1_4avy2")
+displayName = "RPG"
+visual = ExtResource("3_thbey")
+ammo = 3
+shootSound = null
+metadata/_custom_type_script = "uid://b0c2pvngg4dqi"
