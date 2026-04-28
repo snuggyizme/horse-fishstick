@@ -1,14 +1,18 @@
 [gd_scene format=3 uid="uid://d0p6jvkgs1ar2"]
 
-[node name="template" type="Node2D" unique_id=787826941]
+[ext_resource type="TileSet" uid="uid://cdxwohf1nk3s8" path="res://assets/tileset.tres" id="1_efpbr"]
+
+[node name="REPLACE" type="Node2D" unique_id=787826941]
 
 [node name="mid" type="TileMapLayer" parent="." unique_id=1881682151]
 z_index = 5
+tile_set = ExtResource("1_efpbr")
 
 [node name="fore" type="TileMapLayer" parent="." unique_id=1960378014]
 z_index = 7
 
 [node name="back" type="TileMapLayer" parent="." unique_id=1539666024]
+tile_set = ExtResource("1_efpbr")
 
 [node name="playerspawns" type="Node" parent="." unique_id=897724462]
 
