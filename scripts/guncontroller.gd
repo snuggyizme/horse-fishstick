@@ -18,6 +18,9 @@ var holyFuckTooManyAimingVariables
 
 var moveTracer
 
+var zappaDecal = load("res://assets/sprites/zappermuzzledecal.png")
+var roundedLaser
+
 var sounds = {
 	"shot": [
 		"light", # temp for index
@@ -114,6 +117,49 @@ func trace(a, b, width=2.0):
 		fadeTime
 	)
 	tracerTween.finished.connect(func(): tracer.queue_free())
+	
+	if roundedLaser:
+		roundedLaser.modulate = tracer.modulate
+		var endCapTween = get_tree().create_tween()
+		endCapTween.tween_property(
+			roundedLaser,
+			"modulate",
+			fadeOut,
+			fadeTime
+		)
+	
+	if gun.doLayeredTracers and gun.tracerLayersCount:
+		assert(gun.overrideTracers, "Gun " + gun.displayName + " needs to override tracer colours to do layered tracers")
+		for layer in range(gun.tracerLayersCount):
+			var fadeOutLayer
+			var tracerLayer = Line2D.new()
+			tracerLayer.antialiased = true
+			tracerLayer.z_index = 2
+			
+			tracerLayer.default_color = Color(gun.tracerColour)
+			fadeOutLayer = Color.html(gun.tracerColourFade + "00")
+			fadeOutLayer.h += gun.layeredHueShift * layer
+			
+			if gun.doTracersGlow:
+				tracerLayer.default_color = tracerLayer.default_color.blend(Color(2, 2, 2))
+			if gun.overrideFade:
+				fadeTime = gun.fadeTime
+			
+			tracerLayer.width = width / (1.5 * layer + 1)
+			tracerLayer.clear_points()
+			tracerLayer.add_point(a)
+			tracerLayer.add_point(b)
+			
+			get_tree().current_scene.add_child(tracerLayer)
+			
+			var tracerLayerTween = get_tree().create_tween()
+			tracerLayerTween.tween_property(
+				tracerLayer,
+				"default_color",
+				fadeOutLayer,
+				fadeTime + (layer * 0.2)
+			)
+			tracerTween.finished.connect(func(): tracer.queue_free())
 
 func kapingIt():
 	var kapinger = AudioStreamPlayer2D.new()
@@ -152,6 +198,30 @@ func shoot():
 	else:
 		get_parent().nudge(holyFuckTooManyAimingVariables, gun.recoil * 5)
 	#get_parent().nudge(Vector2.LEFT, 350)
+	
+	# gun specifics!
+	match gun.displayName:
+		"ZAPPA":
+			roundedLaser = Sprite2D.new()
+			roundedLaser.texture = zappaDecal
+			roundedLaser.global_position = visual.get_node("muzzle").global_position
+			
+			var shittyOffset = 3
+			match holyFuckTooManyAimingVariables:
+				Vector2.RIGHT:
+					roundedLaser.rotation_degrees = 0
+					roundedLaser.global_position -= Vector2(shittyOffset, 0)
+				Vector2.DOWN:
+					roundedLaser.rotation_degrees = 90
+					roundedLaser.global_position -= Vector2(0, -shittyOffset)
+				Vector2.LEFT:
+					roundedLaser.rotation_degrees = 180
+					roundedLaser.global_position -= Vector2(-shittyOffset, 0)
+				Vector2.UP:
+					roundedLaser.rotation_degrees = 270
+					roundedLaser.global_position -= Vector2(0, shittyOffset)
+			get_tree().current_scene.add_child(roundedLaser)
+			print("zpa")
 	
 	var spaceState = get_world_2d().direct_space_state
 	var muzzleQuery = PhysicsPointQueryParameters2D.new()

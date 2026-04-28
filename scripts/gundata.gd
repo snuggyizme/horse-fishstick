@@ -17,6 +17,9 @@ class_name GunResource
 @export var doTracersGlow: bool ## Make the tracers emmisive
 @export var fadeTime: float ## Seconds until the tracers fade and disappear
 @export var overrideFade: bool ## True = Use the above value instead of the default
+@export var doLayeredTracers: bool ## Stacks of colours
+@export var layeredHueShift: int ## Change in hue between stacks of tracers
+@export var tracerLayersCount: int ## Amount of stacks of colours
 
 @export_category("Hitscan / Projectile")
 @export var isProjectile: bool ## True = projectile weapon that takes time to move. False = hitscan
