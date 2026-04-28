@@ -5,20 +5,18 @@
 
 [resource]
 script = ExtResource("1_knyjo")
-damage = 1.0
+damage = 0.5
 rateOfFire = 1.3
-rangeLimit = 60
-recoil = 0.1
+rangeLimit = 45
+recoil = 0.25
 spread = 7.0
 knockback = 0.3
-auto = true
 displayName = "Sawed Off Shotgun"
 visual = ExtResource("2_1kiuj")
 isBurst = true
 burstSize = 2
-burstRate = 0.66
-ammo = 8
+burstRate = 0.2
+ammo = 6
 bulletsPerShot = 56
-doBullertsPerShotWithBurstAmmo = true
 shootSound = 4
 metadata/_custom_type_script = "uid://b0c2pvngg4dqi"

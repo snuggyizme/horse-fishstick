@@ -41,6 +41,7 @@ var alreadyDashing := false
 @export var inputPrefix: String # p1- p2-
 
 @onready var coyote: Timer = $coyoteTimer
+@onready var username: Label = $Label
 
 const dashInput = {
 	"p1-":
@@ -54,6 +55,12 @@ const dashInput = {
 			"right": [76, 76],
 		}
 }
+
+func displayUsername():
+	username.modulate = Color(1, 1, 1, 1)
+	
+	var nameTween = create_tween()
+	nameTween.tween_property(username, "modulate:a", 0, 1.1)
 
 func justSwapped():
 	return Input.is_action_just_pressed(inputPrefix + "swap")

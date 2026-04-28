@@ -57,6 +57,7 @@ func loadMap(mapname: String):
 		p1.inputPrefix = "p1-"
 		p1.name = "player1"
 		playerFolder.add_child(p1)
+		p1.displayUsername()
 	
 	if playerFolder.has_node("player2"):
 		p2 = playerFolder.get_node("player2")
@@ -65,6 +66,7 @@ func loadMap(mapname: String):
 		p2.inputPrefix = "p2-"
 		p2.name = "player2"
 		playerFolder.add_child(p2)
+		p2.displayUsername()
 	
 	var spawnA = map.get_node("playerspawns").get_node("a")
 	var spawnB = map.get_node("playerspawns").get_node("b")
@@ -78,6 +80,9 @@ func loadMap(mapname: String):
 	p1.hp = 100
 	p2.hp = 100
 		
+	p1.displayUsername()
+	p2.displayUsername()
+
 func _ready():
 	pickMap()
 	

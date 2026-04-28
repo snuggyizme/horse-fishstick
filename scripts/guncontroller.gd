@@ -249,7 +249,7 @@ func shoot():
 func tryShoot():
 	var now = Time.get_ticks_msec() / 1000.0
 	
-	if gun.isBurst and not gun.doBullertsPerShotWithBurstAmmo: # burst and not shotgun
+	if gun.isBurst and not gun.doBullertsPerShotWithBurstAmmo: # pump shotty or reg burst gun
 		if burstAmmo > 0 and now < burstFireTime:
 			return
 		
@@ -268,6 +268,19 @@ func tryShoot():
 			if visual.has_method("onDryAmmo"):
 				visual.onDryAmmo()
 			return # empty mag die die die uh die
+		
+		if gun.bulletsPerShot > 0:
+			for pellet in range(gun.bulletsPerShot):
+				print("shot - source: pump shotty ", gun.displayName)
+				shoot()
+				
+				if visual.has_method("onShoot"):
+					visual.onShoot()
+			burstAmmo -= 1
+			shootSound()
+			burstFireTime = now + gun.burstRate
+			fireTime = now + gun.rateOfFire
+			return
 		
 		print("shot - source: burst gun ", gun.displayName)
 		shoot()
