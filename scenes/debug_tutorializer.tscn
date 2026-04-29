@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://4y6rxswdanhh"]
+
+[ext_resource type="Script" uid="uid://pn3ijempc84u" path="res://debug_tutorializer.gd" id="1_gc47i"]
+
+[node name="debug tutorializer" type="Node2D" unique_id=784008617]
+script = ExtResource("1_gc47i")
+
+[node name="Button" type="Button" parent="." unique_id=1008440083]
+offset_left = 204.0
+offset_top = 55.0
+offset_right = 283.0
+offset_bottom = 107.0
+text = "do tutorial
+"
+
+[connection signal="pressed" from="Button" to="." method="temporary"]

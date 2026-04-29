@@ -36,11 +36,21 @@ const maps = [
 	
 ]
 
+const tutorialPlaylist = [
+	"tutorial map/tutorial-01"
+]
+
 var lastMaps = []
 
+var expectTutorial = false
+
 func loadMap(mapname: String):
-	var gameworld = get_tree().current_scene.get_node("gameworld")
+	if expectTutorial:
+		expectTutorial = false
+		loadPlaylist(tutorialPlaylist)
+		return
 	
+	var gameworld = get_tree().current_scene.get_node("gameworld")
 	
 	for innocentChild in gameworld.get_children():
 		innocentChild.queue_free()
@@ -54,38 +64,77 @@ func loadMap(mapname: String):
 	var playerScene = load("res://scenes/player.tscn")
 	var playerFolder = get_tree().current_scene.get_node("players")
 	
-	if playerFolder.has_node("player1"):
-		p1 = playerFolder.get_node("player1")
-	else:
-		p1 = playerScene.instantiate()
-		p1.inputPrefix = "p1-"
-		p1.name = "player1"
-		playerFolder.add_child(p1)
-		p1.displayUsername()
+	var randoSpawn = randi_range(0, 1)
 	
-	if playerFolder.has_node("player2"):
-		p2 = playerFolder.get_node("player2")
-	else:
-		p2 = playerScene.instantiate()
-		p2.inputPrefix = "p2-"
-		p2.name = "player2"
-		playerFolder.add_child(p2)
-		p2.displayUsername()
+	var spawnA: Marker2D
+	var spawnB: Marker2D
+	var existsA = false
+	var existsB = false
 	
-	var spawnA = map.get_node("playerspawns").get_node("a")
-	var spawnB = map.get_node("playerspawns").get_node("b")
-	if randi_range(0, 1):
-		p1.teleportAndStop(spawnA.global_position - halfScreen)
-		p2.teleportAndStop(spawnB.global_position - halfScreen)
-	else:
-		p1.teleportAndStop(spawnB.global_position - halfScreen)
-		p2.teleportAndStop(spawnA.global_position - halfScreen)
+	if map.get_node("playerspawns").has_node("a"):
+		spawnA = map.get_node("playerspawns").get_node("a")
+		existsA = true
 	
-	p1.hp = 100
-	p2.hp = 100
+	if map.get_node("playerspawns").has_node("b"):
+		spawnB = map.get_node("playerspawns").get_node("b")
+		existsB = true
 		
-	p1.displayUsername()
-	p2.displayUsername()
+
+	match [existsA, existsB]:
+		[true, true]: # 2 player 2 spawns
+			if playerFolder.has_node("player1"):
+				p1 = playerFolder.get_node("player1")
+			else:
+				p1 = playerScene.instantiate()
+				p1.inputPrefix = "p1-"
+				p1.name = "player1"
+				playerFolder.add_child(p1)
+				p1.displayUsername()
+			
+			if playerFolder.has_node("player2"):
+				p2 = playerFolder.get_node("player2")
+			else:
+				p2 = playerScene.instantiate()
+				p2.inputPrefix = "p2-"
+				p2.name = "player2"
+				playerFolder.add_child(p2)
+				p2.displayUsername()
+			
+			if randoSpawn == 1:
+				p1.teleportAndStop(spawnA.global_position - halfScreen)
+				p2.teleportAndStop(spawnB.global_position - halfScreen)
+				
+			else:
+				p1.teleportAndStop(spawnB.global_position - halfScreen)
+				p2.teleportAndStop(spawnA.global_position - halfScreen)
+	
+			p1.hp = 100
+			p2.hp = 100
+				
+			p1.displayUsername()
+			p2.displayUsername()
+		
+		[true, false]:
+			if playerFolder.has_node("player1"):
+				p1 = playerFolder.get_node("player1")
+			else:
+				p1 = playerScene.instantiate()
+				p1.inputPrefix = "p1-"
+				p1.name = "player1"
+				playerFolder.add_child(p1)
+				p1.displayUsername()
+			
+			p1.teleportAndStop(spawnA.global_position - halfScreen)
+			
+			p1.hp = 100
+			
+			p1.displayUsername()
+		
+		[false, true]:
+			print("Error when loading map.\nMap (singleplayer) requires \n        /playerspawns/a: Marker2D\nMap (multiplayer) requires \n        /playerspawns/a: Marker2D\n        /playerspawns/b: Marker2D")
+		
+		[false, false]:
+			print("Error when loading map.\nMap (singleplayer) requires \n        /playerspawns/a: Marker2D\nMap (multiplayer) requires \n        /playerspawns/a: Marker2D\n        /playerspawns/b: Marker2D")
 
 func _ready():
 	pickMap()
@@ -117,3 +166,6 @@ func _getAllMapNames(m: Array):
 	for i in m:
 		export.append(i["name"])
 	return export
+
+func loadPlaylist(playlist, index=0):
+	loadMap(playlist[index])

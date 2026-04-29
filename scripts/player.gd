@@ -193,11 +193,11 @@ func _physics_process(delta: float) -> void:
 		if doWallBounce:
 			wSpeedX = wSpeedXBounce
 			wSpeedY = wSpeedYBounce
+			wallJumps -= 1 # whatever goes up must go down
 		
 		velocity.x = wSpeedX * wjNormal
 		velocity.y = wSpeedY
 		
-		wallJumps -= 1
 		wallLock = 0.12
 		wallJumped = true
 		

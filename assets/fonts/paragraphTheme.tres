@@ -1,0 +1,14 @@
+[gd_resource type="Theme" format=3 uid="uid://c5bckb5sb5po0"]
+
+[ext_resource type="FontFile" uid="uid://b6vs2mj480kyp" path="res://assets/fonts/toxigenesis bd.otf" id="1_drjxh"]
+
+[sub_resource type="FontVariation" id="FontVariation_lw0vs"]
+base_font = ExtResource("1_drjxh")
+spacing_glyph = 1
+
+[resource]
+default_font = SubResource("FontVariation_lw0vs")
+Label/colors/font_outline_color = Color(0.35, 0.35, 0.35, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.9098039)
+Label/constants/outline_size = 3
+Label/font_sizes/font_size = 9

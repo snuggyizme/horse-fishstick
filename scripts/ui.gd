@@ -24,24 +24,28 @@ func bindPlayers(p1, p2):
 	if self.player1:
 		if self.player1.damaged.is_connected(_onPlayerOneHit):
 			self.player1.damaged.disconnect(_onPlayerOneHit)
+		
+		self.p1_hp = p1.hp
 	
-	if self.player1:
-		if self.player1.damaged.is_connected(_onPlayerTwoHit):
-			self.player1.damaged.disconnect(_onPlayerTwoHit)
+	if self.player2:
+		if self.player2.damaged.is_connected(_onPlayerTwoHit):
+			self.player2.damaged.disconnect(_onPlayerTwoHit)
+		
+		self.p2_hp = p2.hp
 	
-	self.p1_hp = p1.hp
-	self.p2_hp = p2.hp
 	updateBars()
 	
-	if not p1.damaged.is_connected(_onPlayerOneHit):
-		p1.damaged.connect(_onPlayerOneHit)
-	if not p2.damaged.is_connected(_onPlayerTwoHit):
-		p2.damaged.connect(_onPlayerTwoHit)
+	if self.player1:
+		if not p1.damaged.is_connected(_onPlayerOneHit):
+			p1.damaged.connect(_onPlayerOneHit)
+		if not p1.death.is_connected(feedAddKill):
+			p1.death.connect(feedAddKill)
 		
-	if not p1.death.is_connected(feedAddKill):
-		p1.death.connect(feedAddKill)
-	if not p2.death.is_connected(feedAddKill):
-		p2.death.connect(feedAddKill)
+	if self.player2:
+		if not p2.death.is_connected(feedAddKill):
+			p2.death.connect(feedAddKill)
+		if not p2.damaged.is_connected(_onPlayerTwoHit):
+			p2.damaged.connect(_onPlayerTwoHit)
 
 func _onPlayerOneHit(dmg, newHp):
 	p1_hp = newHp
@@ -54,13 +58,13 @@ func _onPlayerTwoHit(dmg, newHp):
 func updateBars():
 	if player1:
 		p1_bar.value = player1.hp
+		if player1.hp > 0:
+			livingPlayers[0] = true
 	if player2:
 		p2_bar.value = player2.hp
+		if player2.hp > 0:
+			livingPlayers[1] = true
 	
-	if player1.hp > 0:
-		livingPlayers[0] = true
-	if player2.hp > 0:
-		livingPlayers[1] = true
 	
 # KILL FEED BELOW ######################################################################################
 # ######################################################################################################
