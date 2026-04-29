@@ -32,7 +32,7 @@ const maps = [
 	{"name": "parliament_01", "group": "parliament"},
 	{"name": "parliament_02", "group": "parliament"},
 	
-	{"name": "atlantis_01", "group": "atlantis"},
+	{"name": "truth_01", "group": "truth"},
 	
 ]
 
