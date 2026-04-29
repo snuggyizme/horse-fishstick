@@ -25,6 +25,7 @@ const maps = [
 	{"name": "temple_01", "group": "temple"},
 	
 	{"name": "store_01", "group": "store"},
+	{"name": "store_02", "group": "store"},
 	
 	{"name": "openair_01", "group": "openair"},
 	{"name": "openair_02", "group": "openair"},
@@ -33,6 +34,7 @@ const maps = [
 	{"name": "parliament_02", "group": "parliament"},
 	
 	{"name": "truth_01", "group": "truth"},
+	{"name": "truth_02", "group": "truth"},
 	
 ]
 

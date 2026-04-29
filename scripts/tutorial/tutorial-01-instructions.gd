@@ -7,7 +7,7 @@ var inLabel2 = []
 @onready var label2: Label = get_node("2")
 
 func bodyEnteredLabel1(body: Node2D) -> void:
-	print("in 1")
+	#print("in 1")
 	
 	if body.name != "player1":
 		return
@@ -16,7 +16,7 @@ func bodyEnteredLabel1(body: Node2D) -> void:
 
 
 func bodyExitedLabel1(body: Node2D) -> void:
-	print("out 1")
+	#print("out 1")
 	
 	if body.name != "player1":
 		return
@@ -38,7 +38,7 @@ func _process(_delta: float) -> void:
 	var occupationLabel2 = false
 	for body in inLabel2:
 		if body.is_in_group("players") and label2.modulate.a < 1:
-			print("bah")
+			#print("bah")
 			occupationLabel2 = true
 			var tween = create_tween()
 			tween.tween_property(label2, "modulate:a", 1, 0.5)
@@ -52,7 +52,7 @@ func _process(_delta: float) -> void:
 
 
 func bodyEnteredLabel2(body: Node2D) -> void:
-	print("in 2")
+	#print("in 2")
 	
 	if body.name != "player1":
 		return
@@ -61,7 +61,7 @@ func bodyEnteredLabel2(body: Node2D) -> void:
 
 
 func bodyExitedLabel2(body: Node2D) -> void:
-	print("out 2")
+	#print("out 2")
 	
 	if body.name != "player1":
 		return

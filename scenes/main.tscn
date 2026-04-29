@@ -6,9 +6,12 @@
 
 [sub_resource type="Environment" id="Environment_sugp2"]
 background_mode = 3
+ssil_radius = 10.17
 glow_enabled = true
+glow_intensity = 0.55
 glow_bloom = 0.13
 glow_hdr_threshold = 1.5
+glow_hdr_scale = 2.83
 
 [node name="main" type="Node2D" unique_id=1915239700]
 

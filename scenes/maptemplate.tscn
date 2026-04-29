@@ -10,10 +10,17 @@ tile_set = ExtResource("1_efpbr")
 
 [node name="fore" type="TileMapLayer" parent="." unique_id=1960378014]
 z_index = 7
+tile_set = ExtResource("1_efpbr")
 
 [node name="back" type="TileMapLayer" parent="." unique_id=1539666024]
 tile_set = ExtResource("1_efpbr")
 
 [node name="playerspawns" type="Node" parent="." unique_id=897724462]
+
+[node name="a" type="Marker2D" parent="playerspawns" unique_id=772383709]
+position = Vector2(58, 134)
+
+[node name="b" type="Marker2D" parent="playerspawns" unique_id=57144917]
+position = Vector2(374, 134)
 
 [node name="spawners" type="Node2D" parent="." unique_id=19010835]
